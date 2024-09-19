@@ -28,7 +28,6 @@ export default function CountriesIndex ({ countries }) {
                         <td>{country.phone_code}</td>
                         <td>
                           {country.is_active}
-                          {/* create link to destroy */}
                           <button
                             onClick={() => {
                               if (confirm('¿Estás seguro?')) {
