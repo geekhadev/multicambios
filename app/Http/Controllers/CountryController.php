@@ -26,7 +26,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        // formaulario para crear
+        return Inertia::render('Countries/Form');
     }
 
     /**
@@ -34,7 +34,11 @@ class CountryController extends Controller
      */
     public function store(StoreCountryRequest $request)
     {
-        // petición para guardar
+        $country = new Country();
+        $country->name = $request->name;
+        $country->phone_code = $request->phone_code;
+        $country->save();
+        return redirect()->route('countries.index');
     }
 
     /**

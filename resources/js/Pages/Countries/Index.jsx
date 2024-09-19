@@ -1,3 +1,5 @@
+import { Link } from '@inertiajs/react'
+
 export default function CountriesIndex ({ countries }) {
   return (
     <div className="py-12">
@@ -8,6 +10,9 @@ export default function CountriesIndex ({ countries }) {
                 </div>
             </div>
             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <Link href="/countries/create" className="bg-blue-500 text-white px-4 py-2 rounded">
+                  Crear
+                </Link>
                 <table>
                   <thead>
                     <tr>
