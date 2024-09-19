@@ -5,7 +5,8 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint . resources/ --ext .js,.jsx,.ts,.tsx",
-        "lint:fix": "eslint . resources/ --ext .js,.jsx,.ts,.tsx --fix"
+        "lint:fix": "eslint . resources/ --ext .js,.jsx,.ts,.tsx --fix",
+        "pint": "./vendor/bin/pint"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
