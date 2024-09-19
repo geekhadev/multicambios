@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { Link, router } from '@inertiajs/react'
 
 export default function CountriesIndex ({ countries }) {
   return (
@@ -26,7 +26,19 @@ export default function CountriesIndex ({ countries }) {
                       <tr key={country.id}>
                         <td>{country.name}</td>
                         <td>{country.phone_code}</td>
-                        <td>{country.is_active}</td>
+                        <td>
+                          {country.is_active}
+                          {/* create link to destroy */}
+                          <button
+                            onClick={() => {
+                              if (confirm('¿Estás seguro?')) {
+                                router.delete(`/countries/${country.id}`)
+                              }
+                            }}
+                          >
+                            Eliminar
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>

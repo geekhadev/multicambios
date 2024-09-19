@@ -70,6 +70,6 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        // petición para eliminar
+        Country::destroy($country->id);
     }
 }
