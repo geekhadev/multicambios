@@ -1,5 +1,5 @@
-export default function DangerButton({ className = '', disabled, children, ...props }) {
-    return (
+export default function DangerButton ({ className = '', disabled, children, ...props }) {
+  return (
         <button
             {...props}
             className={
@@ -11,5 +11,5 @@ export default function DangerButton({ className = '', disabled, children, ...pr
         >
             {children}
         </button>
-    );
+  )
 }

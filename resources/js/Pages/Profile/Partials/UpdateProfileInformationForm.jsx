@@ -1,31 +1,31 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
+import InputError from '@/Components/InputError'
+import InputLabel from '@/Components/InputLabel'
+import PrimaryButton from '@/Components/PrimaryButton'
+import TextInput from '@/Components/TextInput'
+import { Link, useForm, usePage } from '@inertiajs/react'
+import { Transition } from '@headlessui/react'
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
-    const user = usePage().props.auth.user;
+export default function UpdateProfileInformation ({ mustVerifyEmail, status, className = '' }) {
+  const user = usePage().props.auth.user
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        name: user.name,
-        email: user.email,
-    });
+  const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    name: user.name,
+    email: user.email
+  })
 
-    const submit = (e) => {
-        e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault()
 
-        patch(route('profile.update'));
-    };
+    patch(route('profile.update'))
+  }
 
-    return (
+  return (
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
+                    {'Update your account\'s profile information and email address.'}
                 </p>
             </header>
 
@@ -99,5 +99,5 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </div>
             </form>
         </section>
-    );
+  )
 }

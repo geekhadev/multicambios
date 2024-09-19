@@ -1,5 +1,5 @@
-export default function Checkbox({ className = '', ...props }) {
-    return (
+export default function Checkbox ({ className = '', ...props }) {
+  return (
         <input
             {...props}
             type="checkbox"
@@ -8,5 +8,5 @@ export default function Checkbox({ className = '', ...props }) {
                 className
             }
         />
-    );
+  )
 }

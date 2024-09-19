@@ -1,5 +1,5 @@
-export default function PrimaryButton({ className = '', disabled, children, ...props }) {
-    return (
+export default function PrimaryButton ({ className = '', disabled, children, ...props }) {
+  return (
         <button
             {...props}
             className={
@@ -11,5 +11,5 @@ export default function PrimaryButton({ className = '', disabled, children, ...p
         >
             {children}
         </button>
-    );
+  )
 }
