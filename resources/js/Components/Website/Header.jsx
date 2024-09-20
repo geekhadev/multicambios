@@ -2,10 +2,10 @@ import HeaderLink from './HeaderLink'
 
 const Header = () => {
   return (
-      <head className="flex py-2">
+      <head className="flex py-6">
         <div className="flex max-w-6xl mx-auto w-full justify-between">
           <div className="flex">
-            <img src="https://global66.com/ui-kit/assets/at-logo-text-right/logo-textRight.svg" />
+            <img className='h-8' src="https://global66.com/ui-kit/assets/at-logo-text-right/logo-textRight.svg" />
           </div>
           <div className="flex">
             <nav className="flex items-center gap-2">
@@ -19,10 +19,10 @@ const Header = () => {
                 <a
                   href="/register"
                   className="
-                    bg-blue-500 text-white rounded-full py-1 px-4
+                    bg-blue-700 text-white rounded-full py-1 px-4
                     flex h-full items-center font-bold scale-100
                     transition duration-300
-                    hover:scale-[105%] hover:bg-blue-600
+                    hover:scale-[105%] hover:bg-blue-800
                   "
                 >
                   Register
