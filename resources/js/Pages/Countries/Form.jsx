@@ -47,7 +47,7 @@ export default function CountriesForm () {
                   type="submit"
                   processing={processing}
                 />
-                <Link href="/countries" className="bg-blue-500 text-white px-4 py-2 rounded">
+                <Link href="/dashboard/countries" className="bg-blue-500 text-white px-4 py-2 rounded">
                   Ir al listado
                 </Link>
               </form>

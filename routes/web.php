@@ -24,7 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('countries', CountryController::class);
+    // prefix dashboard
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::resource('countries', CountryController::class)->names('countries');
+    });
 });
 
 require __DIR__.'/auth.php';
