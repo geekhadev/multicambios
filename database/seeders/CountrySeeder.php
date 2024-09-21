@@ -13,6 +13,21 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        Country::factory(10)->create();
+        // Country::factory(10)->create();
+        Country::factory()->create([
+            'name' => 'Venezuela',
+            'prefix' => 'VE',
+            'phone_code' => '+58',
+        ]);
+        Country::factory()->create([
+            'name' => 'Chile',
+            'prefix' => 'CL',
+            'phone_code' => '+56',
+        ]);
+        Country::factory()->create([
+            'name' => 'Colombia',
+            'prefix' => 'CO',
+            'phone_code' => '+57',
+        ]);
     }
 }

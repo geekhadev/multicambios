@@ -21,7 +21,7 @@ class BankFactory extends Factory
         return [
             'country_id' => $country->id,
             'name' => $this->faker->company,
-            'code' => $this->faker->unique()->randomNumber(4),
+            'account_prefix' => $this->faker->unique()->randomNumber(4),
             'is_active' => true,
         ];
     }

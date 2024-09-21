@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
+use App\Http\Requests\Bank\StoreBankRequest;
+use App\Http\Requests\Bank\UpdateBankRequest;
 use App\Models\Bank;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -37,7 +37,7 @@ class BankController extends Controller
         $bank = new Bank();
         $bank->country_id = $request->country_id;
         $bank->name = $request->name;
-        $bank->code = $request->code;
+        $bank->account_prefix = $request->account_prefix;
         $bank->save();
         return redirect()->route('banks.index');
     }

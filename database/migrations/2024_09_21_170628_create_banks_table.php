@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('country_id')->constrained();
             $table->string('name')->unique();
-            $table->string('code')->unique();
+            $table->string('account_prefix')->unique();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
