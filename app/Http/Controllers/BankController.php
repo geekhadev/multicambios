@@ -15,7 +15,12 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
+        $banks = Bank::
+            with('country')
+            ->orderBy('country_id', 'asc')
+            ->orderBy('name', 'asc')
+            ->get();
+
         return Inertia::render('Banks/Index', [
             'banks' => $banks,
         ]);

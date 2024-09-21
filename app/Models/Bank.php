@@ -12,4 +12,9 @@ class Bank extends Model
     protected $table = 'banks';
 
     protected $fillable = ['*'];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

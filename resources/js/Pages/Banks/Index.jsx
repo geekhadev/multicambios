@@ -25,6 +25,7 @@ export default function BanksIndex ({ banks }) {
               <table className="w-full text-sm text-left rtl:text-right">
                 <thead>
                   <tr className='bg-gray-200 border-t border-b border-gray-300'>
+                    <th scope="col" className="px-3 py-2">País</th>
                     <th scope="col" className="px-3 py-2">Nombre</th>
                     <th scope="col" className="px-3 py-2 w-48">Prefijo de cuenta</th>
                     <th scope="col" className="px-3 py-2 w-24">Estado</th>
@@ -34,6 +35,7 @@ export default function BanksIndex ({ banks }) {
                 <tbody>
                   {banks.map(bank => (
                     <tr key={bank.id} className="odd:bg-white even:bg-gray-50 border-b">
+                      <td className="px-3 py-2">{bank.country.name}</td>
                       <td className="px-3 py-2">{bank.name}</td>
                       <td className="px-3 py-2">{bank.account_prefix}</td>
                       <td className="px-3 py-2">
