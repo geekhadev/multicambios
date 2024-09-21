@@ -120,7 +120,9 @@ export default function Authenticated ({ header, children, module, action }) {
         </div>
       </div>
 
-      <main>{children}</main>
+      <main className='pb-6'>
+        {children}
+      </main>
     </div>
   )
 }
