@@ -18,12 +18,12 @@ const FEATURES = [
 
 const Features = () => {
   return (
-    <section className="bg-white">
+    <section id="caracteristicas">
       <div className="flex flex-col max-w-4xl text-center mx-auto py-12 mt-12">
         <h2 className="font-bold text-5xl">
           Descubre todos los beneficios de
           <br />
-          <span className="text-blue-900"> Tu Cuenta Global</span>
+          <span className="text-teal-700"> Tu Cuenta Global</span>
         </h2>
         <p className="max-w-2xl mt-4 mx-auto font-light text-gray-500 text-xl">
           Con Global66 puedes pagar, cobrar, convertir, enviar dinero y más

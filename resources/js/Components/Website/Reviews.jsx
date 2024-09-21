@@ -15,8 +15,8 @@ const REVIEWS = [
 
 const Reviews = () => {
   return (
-    <section>
-      <div className="max-w-6xl px-16 py-12 mx-auto bg-blue-700 rounded-xl text-center">
+    <section id="comentarios">
+      <div className="max-w-6xl px-16 py-12 mx-auto bg-teal-700 rounded-xl text-center">
         <h2 className="mb-2 text-4xl text-balance text-white font-bold">
           ¿Qué opinan nuestros clientes?
         </h2>

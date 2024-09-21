@@ -13,7 +13,7 @@ export default function Authenticated ({ header, children, module, action }) {
             <div className="flex">
               <div className="shrink-0 flex items-center">
                 <Link href="/dashboard">
-                  <img className='h-6' src="https://global66.com/ui-kit/assets/at-logo-text-right/logo-textRight.svg" />
+                  <img className='h-6' src={'/images/logo-color.png'} />
                 </Link>
               </div>
 

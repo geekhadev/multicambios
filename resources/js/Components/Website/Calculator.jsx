@@ -1,9 +1,9 @@
 const Calculator = () => {
   return (
-    <section className="bg-white">
-      <div className="grid max-w-6xl px-16 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 bg-blue-700 rounded-xl">
+    <section id="calculadora">
+      <div className="grid max-w-6xl px-16 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 bg-teal-700 rounded-xl">
         <div className="mr-auto place-self-center lg:col-span-6 px-12">
-          <h2 className="max-w-2xl mb-4 text-4xl text-balance text-blue-300">
+          <h2 className="max-w-2xl mb-4 text-4xl text-balance text-teal-300">
             Transferencias internacionales al
             <span className="font-extrabold text-white"> MEJOR PRECIO GARANTIZADO</span>
           </h2>
@@ -22,7 +22,7 @@ const Calculator = () => {
         <div className="hidden lg:mt-0 lg:col-span-6 lg:flex">
           <div className="flex justify-center bg-white rounded-xl w-96 mx-auto">
             <form className="flex flex-col gap-4 p-8 w-full">
-              <h3 className="text-2xl font-bold text-blue-700">Calcula tu envío</h3>
+              <h3 className="text-2xl font-bold text-teal-700">Calcula tu envío</h3>
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-bold text-gray-700" htmlFor="amount">Cantidad a enviar</label>
                 <input className="p-2 border border-gray-300 rounded-lg" type="text" id="amount" />
@@ -45,7 +45,7 @@ const Calculator = () => {
                   <option value="pe">Perú</option>
                 </select>
               </div>
-              <button className="bg-blue-700 text-white rounded-lg py-2 font-bold">Calcular</button>
+              <button className="bg-teal-700 text-white rounded-lg py-2 font-bold">Calcular</button>
             </form>
           </div>
         </div>
