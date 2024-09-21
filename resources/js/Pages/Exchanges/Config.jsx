@@ -5,7 +5,7 @@ import ExchangeConfigRates from './ConfigRates'
 
 export default function ExchangeConfig ({ exchange, banks }) {
   return (
-    <AuthenticatedLayout module={'Bancos'} action={'Crear'}>
+    <AuthenticatedLayout module={'Bancos'} action={'Configurar'}>
       <Head title="Bancos" />
 
       <div>
