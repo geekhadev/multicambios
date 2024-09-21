@@ -1,5 +1,4 @@
 import { router, Head } from '@inertiajs/react'
-
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 export default function CountriesIndex ({ countries }) {
