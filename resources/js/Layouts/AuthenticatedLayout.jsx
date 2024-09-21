@@ -24,6 +24,9 @@ export default function Authenticated ({ header, children, module, action }) {
                 <NavLink href={route('dashboard.countries.index')} active={route().current('dashboard.countries.index')}>
                   Países
                 </NavLink>
+                <NavLink href={route('dashboard.banks.index')} active={route().current('dashboard.banks.index')}>
+                  Bancos
+                </NavLink>
               </div>
             </div>
 

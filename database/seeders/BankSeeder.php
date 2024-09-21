@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Country;
+use App\Models\Bank;
 
-class CountrySeeder extends Seeder
+class BankSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Country::factory(10)->create();
+        Bank::factory(10)->create();
     }
 }

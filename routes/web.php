@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\BankController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     // prefix dashboard
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::resource('countries', CountryController::class)->names('countries');
+        Route::resource('banks', BankController::class)->names('banks');
     });
 });
 
