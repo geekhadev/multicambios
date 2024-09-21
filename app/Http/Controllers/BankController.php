@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBankRequest;
 use App\Http\Requests\UpdateBankRequest;
 use App\Models\Bank;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class BankController extends Controller
 {
@@ -13,7 +15,10 @@ class BankController extends Controller
      */
     public function index()
     {
-        //
+        $banks = Bank::all();
+        return Inertia::render('Banks/Index', [
+            'banks' => $banks,
+        ]);
     }
 
     /**
@@ -21,7 +26,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Banks/Form');
     }
 
     /**
@@ -29,7 +34,12 @@ class BankController extends Controller
      */
     public function store(StoreBankRequest $request)
     {
-        //
+        $bank = new Bank();
+        $bank->country_id = $request->country_id;
+        $bank->name = $request->name;
+        $bank->code = $request->code;
+        $bank->save();
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -37,7 +47,7 @@ class BankController extends Controller
      */
     public function show(Bank $bank)
     {
-        //
+        // mostrar un elemento
     }
 
     /**
@@ -45,7 +55,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        //
+        // formulario para editar
     }
 
     /**
@@ -53,7 +63,7 @@ class BankController extends Controller
      */
     public function update(UpdateBankRequest $request, Bank $bank)
     {
-        //
+        // petición para actualizar
     }
 
     /**
@@ -61,6 +71,6 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        //
+        Bank::destroy($bank->id);
     }
 }
