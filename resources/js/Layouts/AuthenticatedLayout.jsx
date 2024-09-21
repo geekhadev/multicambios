@@ -2,6 +2,13 @@ import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import { Link, usePage } from '@inertiajs/react'
 
+const NAV = [
+  { label: 'Dashboard', href: 'dashboard' },
+  { label: 'Países', href: 'dashboard.countries.index' },
+  { label: 'Bancos', href: 'dashboard.banks.index' },
+  { label: 'Exchanges', href: 'dashboard.exchanges.index' }
+]
+
 export default function Authenticated ({ header, children, module, action }) {
   const user = usePage().props.auth.user
 
@@ -18,15 +25,11 @@ export default function Authenticated ({ header, children, module, action }) {
               </div>
 
               <div className="space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                  Dashboard
-                </NavLink>
-                <NavLink href={route('dashboard.countries.index')} active={route().current('dashboard.countries.index')}>
-                  Países
-                </NavLink>
-                <NavLink href={route('dashboard.banks.index')} active={route().current('dashboard.banks.index')}>
-                  Bancos
-                </NavLink>
+                {NAV.map(({ label, href }, index) => (
+                  <NavLink key={index} href={route(href)} active={route().current(href)}>
+                    {label}
+                  </NavLink>
+                ))}
               </div>
             </div>
 
