@@ -1,6 +1,6 @@
 const Input = ({ id, label, type, placeholder, value, onChange, required, errors }) => {
   return (
-    <div className='px-0.5 mb-2'>
+    <div className='px-0.5 mb-2 w-full'>
       <label htmlFor={id} className="block mb-1 text-sm font-medium text-gray-900">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
