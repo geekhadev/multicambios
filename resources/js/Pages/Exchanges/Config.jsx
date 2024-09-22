@@ -5,8 +5,8 @@ import ExchangeConfigRates from './ConfigRates'
 
 export default function ExchangeConfig ({ exchange, banks }) {
   return (
-    <AuthenticatedLayout module={'Bancos'} action={'Configurar'}>
-      <Head title="Bancos" />
+    <AuthenticatedLayout module={'Exchange'} action={'Configurar'}>
+      <Head title={`${exchange.origin.name} a ${exchange.destination.name}`} />
 
       <div>
         <div className="max-w-7xl mx-auto px-8">
@@ -14,7 +14,7 @@ export default function ExchangeConfig ({ exchange, banks }) {
             <div className="flex justify-between items-center">
               <div className='flex flex-col'>
                 <h4 className="text-lg font-bold">
-                  Formulario de configuración del Exchange
+                  Configuración de {exchange.origin.name} a {exchange.destination.name}
                 </h4>
                 <p className="text-sm text-gray-500 max-w-96">
                   Aquí debes aplicar toda la configuración necesaria para que el exchange funcione correctamente.
