@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::resource('countries', CountryController::class)->names('countries');
         Route::resource('banks', BankController::class)->names('banks');
+
+        Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');
         Route::resource('exchanges', ExchangeController::class)->names('exchanges');
     });
 });

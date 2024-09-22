@@ -28,9 +28,9 @@ export default function ExchangeConfig ({ exchange, banks }) {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-6 items-start">
             <ExchangeConfigGeneral exchange={exchange} banks={banks} />
-            <ExchangeConfigRates />
+            <ExchangeConfigRates exchange={exchange} />
           </div>
         </div>
       </div>

@@ -27,4 +27,9 @@ class Exchange extends Model
     {
         return $this->belongsTo(Bank::class, 'bank_origin_id');
     }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
 }
