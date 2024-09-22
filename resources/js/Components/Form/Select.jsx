@@ -1,8 +1,8 @@
 const Select = ({ id, label, value, onChange, options, required, errors, placeholder }) => {
   return (
-    <div className='px-0.5'>
-      <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900">
-        {label}
+    <div className='px-0.5 mb-2'>
+      <label htmlFor={id} className="block mb-1 text-sm font-medium text-gray-900">
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
       <select
         id={id}
