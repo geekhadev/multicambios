@@ -5,7 +5,7 @@ export default function Guest ({ children }) {
     <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
       <div>
         <Link href="/">
-          <img className='h-12 mb-12' src="https://global66.com/ui-kit/assets/at-logo-text-right/logo-textRight.svg" />
+          <img className='h-16 mb-12' src={'images/logo-color.png'} />
         </Link>
       </div>
 
