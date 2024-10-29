@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/react'
 import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
 import Select from '../../Components/Form/Select'
+import { Accordion } from 'flowbite-react'
 
 export default function ExchangeConfigGeneral ({ exchange, banks }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
@@ -130,157 +131,137 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
       </div>
       <div className="relative overflow-x-auto mt-3">
         <form onSubmit={submit} className='flex flex-col gap-2'>
-          <div id="accordion-open" data-accordion="open" key={keyRandom}>
-            <h2 id="accordion-open-heading-1">
-              <button
-                type="button"
-                data-accordion-target="#accordion-open-body-1"
-                aria-expanded="true"
-                aria-controls="accordion-open-body-1"
-                className="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t hover:bg-gray-100 gap-3"
-              >
-                <span className="flex items-center">
-                  Montos
-                </span>
-                <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
-                </svg>
-              </button>
-            </h2>
-            <div id="accordion-open-body-1" className="hidden" aria-labelledby="accordion-open-heading-1">
-              <div className="p-3 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                {INPUTS_AMOUNTS.map(({ key, label, type, options, placeholder }) => (
+          <Accordion>
+            <Accordion.Panel>
+              <Accordion.Title className="px-4 py-3">
+                Montos
+              </Accordion.Title>
+              <Accordion.Content>
+                {INPUTS_AMOUNTS.map(({
+                  key,
+                  label,
+                  type,
+                  options,
+                  placeholder
+                }) => (
                   Object.prototype.hasOwnProperty.call(data, key) && (
                     type === 'select'
                       ? (
-                          <Select
-                            key={key}
-                            label={label}
-                            id={key}
-                            value={data[key]}
-                            onChange={handleChange}
-                            required
-                            errors={errors}
-                            options={options}
-                            placeholder={placeholder}
-                          />
+                        <Select
+                          key={key}
+                          label={label}
+                          id={key}
+                          value={data[key]}
+                          onChange={handleChange}
+                          required
+                          errors={errors}
+                          options={options}
+                          placeholder={placeholder}
+                        />
                         )
                       : (
-                          <Input
-                            key={key}
-                            label={label}
-                            type={type}
-                            id={key}
-                            value={data[key]}
-                            onChange={handleChange}
-                            required
-                            errors={errors}
-                          />
+                        <Input
+                          key={key}
+                          label={label}
+                          type={type}
+                          id={key}
+                          value={data[key]}
+                          onChange={handleChange}
+                          required
+                          errors={errors}
+                        />
                         )
                   )
                 ))}
-              </div>
-            </div>
-            <h2 id="accordion-open-heading-2">
-              <button
-                type="button"
-                className="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 hover:bg-gray-100 gap-3"
-                data-accordion-target="#accordion-open-body-2"
-                aria-expanded="false"
-                aria-controls="accordion-open-body-2"
-              >
-                <span className="flex items-center">
-                  Datos de la cuenta
-                </span>
-                <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
-                </svg>
-              </button>
-            </h2>
-            <div id="accordion-open-body-2" className="hidden" aria-labelledby="accordion-open-heading-2">
-              <div className="p-3 border border-b-0 border-gray-200 dark:border-gray-700">
-                {INPUTS_BANK.map(({ key, label, type, options, placeholder }) => (
+              </Accordion.Content>
+            </Accordion.Panel>
+            <Accordion.Panel>
+              <Accordion.Title className="px-4 py-3">
+                Datos de la cuenta
+              </Accordion.Title>
+              <Accordion.Content>
+                {INPUTS_BANK.map(({
+                  key,
+                  label,
+                  type,
+                  options,
+                  placeholder
+                }) => (
                   Object.prototype.hasOwnProperty.call(data, key) && (
                     type === 'select'
                       ? (
-                          <Select
-                            key={key}
-                            label={label}
-                            id={key}
-                            value={data[key]}
-                            onChange={handleChange}
-                            required
-                            errors={errors}
-                            options={options}
-                            placeholder={placeholder}
-                          />
+                        <Select
+                          key={key}
+                          label={label}
+                          id={key}
+                          value={data[key]}
+                          onChange={handleChange}
+                          required
+                          errors={errors}
+                          options={options}
+                          placeholder={placeholder}
+                        />
                         )
                       : (
-                          <Input
-                            key={key}
-                            label={label}
-                            type={type}
-                            id={key}
-                            value={data[key]}
-                            onChange={handleChange}
-                            required
-                            errors={errors}
-                          />
+                        <Input
+                          key={key}
+                          label={label}
+                          type={type}
+                          id={key}
+                          value={data[key]}
+                          onChange={handleChange}
+                          required
+                          errors={errors}
+                        />
                         )
                   )
                 ))}
-              </div>
-            </div>
-            <h2 id="accordion-open-heading-3">
-              <button
-                type="button"
-                className="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-b hover:bg-gray-100 gap-3"
-                data-accordion-target="#accordion-open-body-3"
-                aria-expanded="false"
-                aria-controls="accordion-open-body-3">
-                <span className="flex items-center">
-                  Datos del títular
-                </span>
-                <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
-                </svg>
-              </button>
-            </h2>
-            <div id="accordion-open-body-3" className="hidden" aria-labelledby="accordion-open-heading-3">
-              <div className="p-3 border border-t-0 border-gray-200 dark:border-gray-700">
-                {INPUTS_OWNER.map(({ key, label, type, options, placeholder }) => (
+              </Accordion.Content>
+            </Accordion.Panel>
+            <Accordion.Panel>
+              <Accordion.Title className="px-4 py-3">
+                Datos del títular
+              </Accordion.Title>
+              <Accordion.Content>
+                {INPUTS_OWNER.map(({
+                  key,
+                  label,
+                  type,
+                  options,
+                  placeholder
+                }) => (
                   Object.prototype.hasOwnProperty.call(data, key) && (
                     type === 'select'
                       ? (
-                          <Select
-                            key={key}
-                            label={label}
-                            id={key}
-                            value={data[key]}
-                            onChange={handleChange}
-                            required
-                            errors={errors}
-                            options={options}
-                            placeholder={placeholder}
-                          />
+                        <Select
+                          key={key}
+                          label={label}
+                          id={key}
+                          value={data[key]}
+                          onChange={handleChange}
+                          required
+                          errors={errors}
+                          options={options}
+                          placeholder={placeholder}
+                        />
                         )
                       : (
-                          <Input
-                            key={key}
-                            label={label}
-                            type={type}
-                            id={key}
-                            value={data[key]}
-                            onChange={handleChange}
-                            required
-                            errors={errors}
-                          />
+                        <Input
+                          key={key}
+                          label={label}
+                          type={type}
+                          id={key}
+                          value={data[key]}
+                          onChange={handleChange}
+                          required
+                          errors={errors}
+                        />
                         )
                   )
                 ))}
-              </div>
-            </div>
-          </div>
+              </Accordion.Content>
+            </Accordion.Panel>
+          </Accordion>
 
           <div className='px-0.5'>
             <Button
