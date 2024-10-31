@@ -6,7 +6,8 @@ const fields = [
   { key: 'last_name', label: 'Apellido' },
   { key: 'email', label: 'Correo' },
   { key: 'phone', label: 'Teléfono' },
-  { key: 'country.name', label: 'País' }
+  { key: 'country.name', label: 'País' },
+  { key: 'is_active', label: 'Activo' }
 ]
 
 const benefits = [
@@ -78,11 +79,9 @@ export default function CustomersView ({ customer }) {
                       </div>
                     ))}
                 </div>
-                <div className="flex flex-col py-2 border-b border-gray-200 gap-2 bg-gray-200">
-                  <img src="https://rutificadorchile.com/wp-content/uploads/2020/07/dni.jpeg" className="w-full rounded-lg mx-auto" alt="Documento de identidad" />
-                </div>
-                <div className="flex flex-col py-2 border-b border-gray-200 gap-2 bg-gray-200">
-                  <img src="https://st5.depositphotos.com/79147440/65671/i/450/depositphotos_656719760-stock-photo-blonde-brazilian-woman-holding-identity.jpg" className="w-full rounded-lg mx-auto" alt="Foto del cliente" />
+                <div className="grid grid-cols-2 py-2 border-b border-gray-200 gap-2 items-center">
+                  <img src="https://rutificadorchile.com/wp-content/uploads/2020/07/dni.jpeg" className="w-full h-full rounded-lg mx-auto" alt="Documento de identidad" />
+                  <img src="https://st5.depositphotos.com/79147440/65671/i/450/depositphotos_656719760-stock-photo-blonde-brazilian-woman-holding-identity.jpg" className="w-full h-full rounded-lg mx-auto" alt="Foto del cliente" />
                 </div>
               </div>
             </div>
@@ -128,20 +127,20 @@ export default function CustomersView ({ customer }) {
                 <table className="w-full text-sm text-left rtl:text-right">
                   <thead>
                   <tr className="bg-gray-200 border-t border-b border-gray-300">
-                    <th scope="col" className="px-3 py-2">Beneficiario</th>
-                    <th scope="col" className="px-3 py-2">Banco</th>
                     <th scope="col" className="px-3 py-2">Fecha</th>
                     <th scope="col" className="px-3 py-2">Monto</th>
+                    <th scope="col" className="px-3 py-2">Beneficiario</th>
+                    <th scope="col" className="px-3 py-2">Banco</th>
                     <th scope="col" className="px-3 py-2">Estado</th>
                   </tr>
                   </thead>
                   <tbody>
                   {transactions.map(transaction => (
                     <tr key={customer.id} className="odd:bg-white even:bg-gray-50 border-b">
+                      <td className="px-3 py-2">{transaction.date}</td>
+                      <td className="px-3 py-2">${transaction.amount}</td>
                       <td className="px-3 py-2">{transaction.benefit.name}</td>
                       <td className="px-3 py-2">{transaction.bank.name}</td>
-                      <td className="px-3 py-2">{transaction.date}</td>
-                      <td className="px-3 py-2">{transaction.amount}</td>
                       <td className="px-3 py-2">{transaction.status}</td>
                     </tr>
                   ))}
