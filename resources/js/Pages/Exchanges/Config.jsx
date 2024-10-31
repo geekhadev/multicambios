@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import ExchangeConfigGeneral from './ConfigGeneral'
 import ExchangeConfigRates from './ConfigRates'
 
-export default function ExchangeConfig ({ exchange, banks }) {
+export default function ExchangeConfig ({ exchange, banks, rate }) {
   return (
     <AuthenticatedLayout module={'Exchange'} action={'Configurar'}>
       <Head title={`${exchange.origin.name} a ${exchange.destination.name}`} />
@@ -30,7 +30,7 @@ export default function ExchangeConfig ({ exchange, banks }) {
           </div>
           <div className="grid grid-cols-3 gap-6 items-start">
             <ExchangeConfigGeneral exchange={exchange} banks={banks} />
-            <ExchangeConfigRates exchange={exchange} />
+            <ExchangeConfigRates exchange={exchange} rate={rate} />
           </div>
         </div>
       </div>

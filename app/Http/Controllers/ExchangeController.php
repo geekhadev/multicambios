@@ -73,11 +73,15 @@ class ExchangeController extends Controller
             ->where('is_active', true)
             ->get();
 
-        // dd($exchange->with('origin')->toArray());
+        $rate = Rate::
+            where('exchange_id', $exchange->id)
+            ->latest()
+            ->first();
 
         return Inertia::render('Exchanges/Config', [
             'exchange' => $exchange,
             'banks' => $banks,
+            'rate' => $rate,
         ]);
     }
 
@@ -86,7 +90,23 @@ class ExchangeController extends Controller
      */
     public function update(UpdateExchangeRequest $request, Exchange $exchange)
     {
-        dd($request->all());
+        $object = Exchange::find($exchange->id);
+        $object->country_origin_id = $request->country_origin_id;
+        $object->country_destination_id = $request->country_destination_id;
+        $object->amount_min = $request->amount_min;
+        $object->amount_max = $request->amount_max;
+        $object->amount_preferential = $request->amount_preferential;
+        $object->bank_origin_id = $request->bank_origin_id;
+        $object->bank_origin_account_number = $request->bank_origin_account_number;
+        $object->bank_origin_account_type = $request->bank_origin_account_type;
+        $object->bank_origin_owner_document_type = $request->bank_origin_owner_document_type;
+        $object->bank_origin_owner_document_number = $request->bank_origin_owner_document_number;
+        $object->bank_origin_owner_name = $request->bank_origin_owner_name;
+        $object->bank_origin_owner_phone = $request->bank_origin_owner_phone;
+        $object->bank_origin_owner_email = $request->bank_origin_owner_email;
+        $object->banks_destinations_ids = json_encode($request->banks_destinations_ids);
+        $object->is_active = $request->is_active;
+        $object->save();
     }
 
     /**

@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react'
+import { useEffect } from 'react'
 import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
 import { toast } from 'sonner'
@@ -9,7 +10,7 @@ function calculateProfitPercent (rate, profit) {
   return (profit / rate) * 100
 }
 
-export default function ExchangeConfigRates ({ exchange }) {
+export default function ExchangeConfigRates ({ exchange, rate }) {
   const { data, setData, post, processing, errors } = useForm({
     exchange_id: exchange.id,
     general_rate: 0,
@@ -19,6 +20,21 @@ export default function ExchangeConfigRates ({ exchange }) {
     preference_profit: 0,
     preference_profit_percent: 0
   })
+
+  // Actualiza los datos del formulario con los datos de la tasa
+  useEffect(() => {
+    if (rate) {
+      setData({
+        exchange_id: exchange.id,
+        general_rate: rate.general_rate,
+        general_profit: rate.general_profit,
+        general_profit_percent: rate.general_profit_percent,
+        preference_rate: rate.preference_rate,
+        preference_profit: rate.preference_profit,
+        preference_profit_percent: rate.preference_profit_percent
+      })
+    }
+  }, [rate])
 
   function handleChange (e) {
     const key = e.target.id
@@ -57,6 +73,14 @@ export default function ExchangeConfigRates ({ exchange }) {
 
   return (
     <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 col-span-2">
+      {
+        rate && new Date(rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString() && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong className="font-bold">¡Atención!</strong>
+            <span className="block sm:inline"> Última actualización de la tasa: {new Date(rate.timestamp).toLocaleString()}</span>
+          </div>
+        )
+      }
       <div className="flex justify-between items-center">
         <div className='flex flex-col'>
           <h4 className="text-lg font-bold">

@@ -4,6 +4,7 @@ import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
 import Select from '../../Components/Form/Select'
 import { Accordion } from 'flowbite-react'
+import { toast } from 'sonner'
 
 export default function ExchangeConfigGeneral ({ exchange, banks }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
@@ -22,7 +23,14 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
   function submit (e) {
     e.preventDefault()
 
-    patch(`/dashboard/exchanges/${exchange.id}`)
+    patch(`/dashboard/exchanges/${exchange.id}`,
+      {
+        preserveScroll: true,
+        onSuccess: () => {
+          toast.success('Configuración general guardada exitosamente')
+        }
+      }
+    )
   }
 
   const INPUTS_AMOUNTS = [
