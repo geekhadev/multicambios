@@ -7,7 +7,8 @@ const NAV = [
   { label: 'Dashboard', href: 'dashboard' },
   { label: 'Países', href: 'dashboard.countries.index' },
   { label: 'Bancos', href: 'dashboard.banks.index' },
-  { label: 'Exchanges', href: 'dashboard.exchanges.index' }
+  { label: 'Exchanges', href: 'dashboard.exchanges.index' },
+  { label: 'Clientes', href: 'dashboard.customers.index' },
 ]
 
 export default function Authenticated ({ header, children, module, action }) {
