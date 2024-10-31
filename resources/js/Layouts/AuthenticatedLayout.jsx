@@ -7,7 +7,8 @@ const NAV = [
   { label: 'Dashboard', href: 'dashboard' },
   { label: 'Países', href: 'dashboard.countries.index' },
   { label: 'Bancos', href: 'dashboard.banks.index' },
-  { label: 'Exchanges', href: 'dashboard.exchanges.index' }
+  { label: 'Exchanges', href: 'dashboard.exchanges.index' },
+  { label: 'Clientes', href: 'dashboard.customers.index' }
 ]
 
 export default function Authenticated ({ header, children, module, action }) {
@@ -29,6 +30,7 @@ export default function Authenticated ({ header, children, module, action }) {
                 {NAV.map(({ label, href }, index) => (
                   <NavLink key={index} href={route(href)} active={route().current(href)}>
                     {label}
+                    {label === 'Clientes' && (<span className="bg-red-300 text-red-800 px-2 py-1 text-[8pt] rounded-full ml-2">3 por confirmar</span>)}
                   </NavLink>
                 ))}
               </div>
@@ -41,7 +43,7 @@ export default function Authenticated ({ header, children, module, action }) {
                     <span className="inline-flex rounded-md">
                       <button
                         type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                       >
                         {user.name}
 

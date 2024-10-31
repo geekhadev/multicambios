@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::resource('countries', CountryController::class)->names('countries');
         Route::resource('banks', BankController::class)->names('banks');
+
+        Route::resource('customers', CustomerController::class)->names('customers');
 
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');
         Route::resource('exchanges', ExchangeController::class)->names('exchanges');
