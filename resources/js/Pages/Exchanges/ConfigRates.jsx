@@ -18,7 +18,8 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
     general_profit_percent: 0,
     preference_rate: 0,
     preference_profit: 0,
-    preference_profit_percent: 0
+    preference_profit_percent: 0,
+    rate_dolar: 0
   })
 
   // Actualiza los datos del formulario con los datos de la tasa
@@ -31,7 +32,8 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
         general_profit_percent: rate.general_profit_percent,
         preference_rate: rate.preference_rate,
         preference_profit: rate.preference_profit,
-        preference_profit_percent: rate.preference_profit_percent
+        preference_profit_percent: rate.preference_profit_percent,
+        rate_dolar: rate.rate_dolar
       })
     }
   }, [rate])
@@ -67,6 +69,8 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
       preserveScroll: true,
       onSuccess: () => {
         toast.success('Tasa de cambio guardada exitosamente')
+        // refresh the page
+        window.location.reload()
       }
     })
   }
@@ -110,7 +114,7 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
               errors={errors}
             />
             <Input
-              label={'% Ganancia tasa general'}
+              label={'% Gan. tasa general'}
               type={'number'}
               id={'general_profit_percent'}
               value={data.general_profit_percent}
@@ -141,13 +145,22 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
               errors={errors}
             />
             <Input
-              label={'% Ganancia tasa preferencial'}
+              label={'% Gan. tasa preferencial'}
               type={'number'}
               id={'preference_profit_percent'}
               value={data.preference_profit_percent}
               onChange={handleChange}
               required
               readOnly
+              errors={errors}
+            />
+            <Input
+              label={'Tasa dolar'}
+              type={'number'}
+              id={'rate_dolar'}
+              value={data.rate_dolar}
+              onChange={handleChange}
+              required
               errors={errors}
             />
           </div>

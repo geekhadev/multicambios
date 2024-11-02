@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('preference_rate', 10, 5);
             $table->decimal('preference_profit', 10, 5);
             $table->decimal('preference_profit_percent', 10, 2);
+            $table->decimal('rate_dolar', 10, 2);
             $table->timestamps();
         });
     }

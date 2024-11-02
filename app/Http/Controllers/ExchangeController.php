@@ -127,6 +127,8 @@ class ExchangeController extends Controller
         $rate->preference_rate = $request->preference_rate;
         $rate->preference_profit = $request->preference_profit;
         $rate->preference_profit_percent = $request->preference_profit_percent;
+        $rate->rate_dolar = $request->rate_dolar;
+        $rate->timestamp = now();
         $rate->save();
     }
 
