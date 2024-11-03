@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -34,6 +35,7 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
         Route::resource('banks', BankController::class)->names('banks');
 
         Route::resource('customers', CustomerController::class)->names('customers');
+        Route::resource('benefits', BenefitController::class)->names('benefits');
 
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');
         Route::resource('exchanges', ExchangeController::class)->names('exchanges');
