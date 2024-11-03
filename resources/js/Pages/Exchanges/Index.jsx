@@ -1,8 +1,7 @@
-import { Head, Link, usePage } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
-export default function EchangesIndex () {
-  const { globalExchanges } = usePage().props
+export default function ExchangesIndex ({ exchanges }) {
   return (
     <AuthenticatedLayout module={'Exchanges'}>
       <Head title="Exchanges" />
@@ -36,7 +35,7 @@ export default function EchangesIndex () {
                   </tr>
                 </thead>
                 <tbody>
-                  {globalExchanges.map(exchange => (
+                  {exchanges.map(exchange => (
                     <tr key={exchange.id} className="odd:bg-white even:bg-gray-50 border-b">
                       <td className="px-3 py-2 whitespace-nowrap">
                         {exchange.origin.name}
@@ -89,7 +88,7 @@ export default function EchangesIndex () {
                 <tfoot>
                   <tr className="bg-gray-100">
                     <td colSpan="16" className="px-3 py-2 font-bold">
-                      Total: {globalExchanges.length} elementos
+                      Total: {exchanges.length} elementos
                     </td>
                   </tr>
                 </tfoot>
