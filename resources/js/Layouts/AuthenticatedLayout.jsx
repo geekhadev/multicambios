@@ -6,10 +6,11 @@ import WidgetCalculator from './WidgetCalculator'
 
 const NAV = [
   { label: 'Dashboard', href: 'dashboard' },
-  { label: 'Países', href: 'dashboard.countries.index' },
-  { label: 'Bancos', href: 'dashboard.banks.index' },
+  { label: 'Clientes', href: 'dashboard.customers.index' },
+  { label: 'Beneficiarios', href: 'dashboard.benefits.index' },
   { label: 'Exchanges', href: 'dashboard.exchanges.index' },
-  { label: 'Clientes', href: 'dashboard.customers.index' }
+  { label: 'Países', href: 'dashboard.countries.index' },
+  { label: 'Bancos', href: 'dashboard.banks.index' }
 ]
 
 export default function Authenticated ({ header, children, module, action }) {
@@ -22,7 +23,7 @@ export default function Authenticated ({ header, children, module, action }) {
           <div className="flex justify-between h-12">
             <div className="flex">
               <div className="shrink-0 flex items-center">
-                <Link href="/dashboard">
+                <Link href={route('dashboard')}>
                   <img className='h-6' src={'/images/logo-color.png'} />
                 </Link>
               </div>
