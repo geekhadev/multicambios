@@ -2,7 +2,7 @@ import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import { Link, usePage } from '@inertiajs/react'
 import { Toaster } from 'sonner'
-// import WidgetCalculator from './WidgetCalculator'
+import WidgetCalculator from './WidgetCalculator'
 
 const NAV = [
   { label: 'Dashboard', href: 'dashboard' },
@@ -83,7 +83,7 @@ export default function Authenticated ({ header, children, module, action }) {
 
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          {/* <WidgetCalculator /> */}
+          <WidgetCalculator />
         </div>
       </header>
 
