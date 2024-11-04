@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
 
 export default function CountriesIndex ({ customers }) {
   return (
@@ -38,7 +39,9 @@ export default function CountriesIndex ({ customers }) {
                 <tbody>
                   {customers.map(customer => (
                     <tr key={customer.id} className="odd:bg-white even:bg-gray-50 border-b">
-                      <td className="px-3 py-2">{customer.country.name}</td>
+                      <td className="px-3 py-2">
+                        <CountryWithIcon country={customer.country} />
+                      </td>
                       <td className="px-3 py-2">{customer.first_name}</td>
                       <td className="px-3 py-2">{customer.last_name}</td>
                       <td className="px-3 py-2">{customer.email}</td>

@@ -1,5 +1,6 @@
 import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
 
 export default function BanksIndex ({ banks }) {
   return (
@@ -35,7 +36,9 @@ export default function BanksIndex ({ banks }) {
                 <tbody>
                   {banks.map(bank => (
                     <tr key={bank.id} className="odd:bg-white even:bg-gray-50 border-b">
-                      <td className="px-3 py-2">{bank.country.name}</td>
+                      <td className="px-3 py-2">
+                        <CountryWithIcon country={bank.country} />
+                      </td>
                       <td className="px-3 py-2">{bank.name}</td>
                       <td className="px-3 py-2">{bank.account_prefix}</td>
                       <td className="px-3 py-2">
