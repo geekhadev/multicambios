@@ -1,10 +1,9 @@
 import { useForm } from '@inertiajs/react'
-import { useEffect } from 'react'
 import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
 import { toast } from 'sonner'
 
-// Función reutilizable para calcular el porcentaje de ganancia
+// TODO: agregar esto a un utils reusable
 function calculateProfitPercent (rate, profit) {
   if (!rate || !profit) return 0
   return (profit / rate) * 100
@@ -13,30 +12,14 @@ function calculateProfitPercent (rate, profit) {
 export default function ExchangeConfigRates ({ exchange, rate }) {
   const { data, setData, post, processing, errors } = useForm({
     exchange_id: exchange.id,
-    general_rate: 0,
-    general_profit: 0,
-    general_profit_percent: 0,
-    preference_rate: 0,
-    preference_profit: 0,
-    preference_profit_percent: 0,
-    rate_dolar: 0
+    general_rate: rate.general_rate,
+    general_profit: rate.general_profit,
+    general_profit_percent: rate.general_profit_percent,
+    preference_rate: rate.preference_rate,
+    preference_profit: rate.preference_profit,
+    preference_profit_percent: rate.preference_profit_percent,
+    rate_dolar: rate.rate_dolar
   })
-
-  // Actualiza los datos del formulario con los datos de la tasa
-  useEffect(() => {
-    if (rate) {
-      setData({
-        exchange_id: exchange.id,
-        general_rate: rate.general_rate,
-        general_profit: rate.general_profit,
-        general_profit_percent: rate.general_profit_percent,
-        preference_rate: rate.preference_rate,
-        preference_profit: rate.preference_profit,
-        preference_profit_percent: rate.preference_profit_percent,
-        rate_dolar: rate.rate_dolar
-      })
-    }
-  }, [rate])
 
   function handleChange (e) {
     const key = e.target.id
@@ -50,8 +33,7 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
     }
 
     if (key === 'general_rate' || key === 'general_profit') {
-      const generalProfitPercent = calculateProfitPercent(updatedData.general_rate, updatedData.general_profit)
-      updatedData.general_profit_percent = generalProfitPercent
+      updatedData.general_profit_percent = calculateProfitPercent(updatedData.general_rate, updatedData.general_profit)
     }
 
     if (key === 'general_rate' || key === 'preference_rate' || key === 'preference_profit') {
@@ -69,8 +51,6 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
       preserveScroll: true,
       onSuccess: () => {
         toast.success('Tasa de cambio guardada exitosamente')
-        // refresh the page
-        window.location.reload()
       }
     })
   }
