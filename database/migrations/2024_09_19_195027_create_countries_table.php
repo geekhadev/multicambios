@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 100)->unique();
             $table->string('prefix', 3)->unique();
             $table->string('phone_code', 5)->unique();
+            $table->string('url_flag', 100)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
