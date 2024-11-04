@@ -8,8 +8,10 @@ import { toast } from 'sonner'
 
 export default function ExchangeConfigGeneral ({ exchange, banks }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
+  // TODO: porque esto?
   const [keyRandom, setKeyRandom] = useState(Math.random() + new Date().getTime())
 
+  // TODO: porque esto?
   useEffect(() => {
     setKeyRandom(Math.random())
   }, [exchange])

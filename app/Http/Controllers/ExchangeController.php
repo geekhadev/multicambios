@@ -18,6 +18,8 @@ class ExchangeController extends Controller
      */
     public function index()
     {
+        // TODO: add policy validation (form file)
+
         $exchanges = Exchange::
             with(
                 'origin',
@@ -90,6 +92,9 @@ class ExchangeController extends Controller
      */
     public function update(UpdateExchangeRequest $request, Exchange $exchange)
     {
+        // TODO: add policy validation (form file)
+        // TODO: add request validation (form file)
+
         $object = Exchange::find($exchange->id);
         $object->country_origin_id = $request->country_origin_id;
         $object->country_destination_id = $request->country_destination_id;
@@ -119,6 +124,24 @@ class ExchangeController extends Controller
 
     public function rate(Request $request)
     {
+        // TODO: add policy validation (form file)
+        // TODO: add request validation (form file)
+        /*
+            TODO: fix error create rate
+            SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'general_rate' at row 1 (Connection: mysql, SQL: insert into `rates` (`exchange_id`, `general_rate`, `general_profit`, `general_profit_percent`, `preference_rate`, `preference_profit`, `preference_profit_percent`, `rate_dolar`, `timestamp`, `updated_at`, `created_at`) values (1, 200000, 1000, 0.5, 199500, 500, 0.25, 12, 2024-11-04 18:16:28, 2024-11-04 18:16:28, 2024-11-04 18:16:28))
+            with this payload:
+            {
+                "exchange_id": 1,
+                "general_rate": 200000,
+                "general_profit": 1000,
+                "general_profit_percent": 0.5,
+                "preference_rate": 199500,
+                "preference_profit": 500,
+                "preference_profit_percent": 0.25,
+                "rate_dolar": 12
+            }
+        */
+
         $rate = new Rate();
         $rate->exchange_id = $request->exchange_id;
         $rate->general_rate = $request->general_rate;
@@ -128,6 +151,7 @@ class ExchangeController extends Controller
         $rate->preference_profit = $request->preference_profit;
         $rate->preference_profit_percent = $request->preference_profit_percent;
         $rate->rate_dolar = $request->rate_dolar;
+        // TODO: this should generate automatically
         $rate->timestamp = now();
         $rate->save();
     }
