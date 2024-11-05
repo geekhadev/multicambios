@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { useForm } from '@inertiajs/react'
 import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
@@ -8,13 +7,6 @@ import { toast } from 'sonner'
 
 export default function ExchangeConfigGeneral ({ exchange, banks }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
-  // TODO: porque esto?
-  const [keyRandom, setKeyRandom] = useState(Math.random() + new Date().getTime())
-
-  // TODO: porque esto?
-  useEffect(() => {
-    setKeyRandom(Math.random())
-  }, [exchange])
 
   function handleChange (e) {
     const key = e.target.id
