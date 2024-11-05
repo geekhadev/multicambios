@@ -10,10 +10,7 @@ class State extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'country_id',
-        'name',
-    ];
+    protected $fillable = ['*'];
 
     public function country(): BelongsTo
     {
