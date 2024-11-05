@@ -16,7 +16,7 @@ class CustomerController extends Controller
     {
         $this->authorize('viewAny', Customer::class);
 
-        $customers = Customer::with('country')->get();
+        $customers = Customer::with('country', 'state')->get();
 
         return Inertia::render('Customers/Index', [
             'customers' => $customers,
@@ -33,6 +33,8 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $this->authorize('view', $customer);
+
+        $customer->load('country', 'state');
 
         return Inertia::render('Customers/View', [
             'customer' => $customer,
