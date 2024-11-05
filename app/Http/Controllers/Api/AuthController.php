@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\RegisterRequest;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Models\Customer;
 use App\Models\User;
 use DB;
@@ -63,12 +63,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('phone', $request->phone)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Credenciales incorrectas'], 401);

@@ -2,19 +2,19 @@
 
 namespace App\Http\Requests\Api\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Api\ApiRequest;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends ApiRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|string',
+            'phone' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8'],
         ];
     }
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
