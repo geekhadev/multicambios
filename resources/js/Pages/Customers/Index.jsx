@@ -76,7 +76,7 @@ export default function CountriesIndex ({ customers }) {
                 </tbody>
                 <tfoot>
                 <tr className="bg-gray-100">
-                  <td colSpan="8" className="px-3 py-2 font-bold">
+                  <td colSpan="9" className="px-3 py-2 font-bold">
                   Total: {customers.length} elementos
                   </td>
                 </tr>
