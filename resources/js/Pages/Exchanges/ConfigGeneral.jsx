@@ -31,17 +31,20 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
     {
       key: 'amount_min',
       label: 'Monto mínimo',
-      type: 'number'
+      type: 'number',
+      placeholder: '10000'
     },
     {
       key: 'amount_max',
       label: 'Monto máximo',
-      type: 'number'
+      type: 'number',
+      placeholder: '1000000'
     },
     {
       key: 'amount_preferential',
       label: 'Monto preferencial',
-      type: 'number'
+      type: 'number',
+      placeholder: '50000'
     }
   ]
   const INPUTS_BANK = [
@@ -54,7 +57,8 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
     {
       key: 'bank_origin_account_number',
       label: 'Número de cuenta',
-      type: 'text'
+      type: 'text',
+      placeholder: '1234567890'
     },
     {
       key: 'bank_origin_account_type',
@@ -103,22 +107,26 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
     {
       key: 'bank_origin_owner_document_number',
       label: 'Número de documento',
-      type: 'text'
+      type: 'text',
+      placeholder: '1234567890'
     },
     {
       key: 'bank_origin_owner_name',
       label: 'Nombre del propietario',
-      type: 'text'
+      type: 'text',
+      placeholder: 'Juan Pérez'
     },
     {
       key: 'bank_origin_owner_phone',
       label: 'Teléfono del propietario',
-      type: 'text'
+      type: 'text',
+      placeholder: '04121234567'
     },
     {
       key: 'bank_origin_owner_email',
       label: 'Correo del propietario',
-      type: 'email'
+      type: 'email',
+      placeholder: 'name@mail.com'
     }
   ]
 
@@ -171,6 +179,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
                           onChange={handleChange}
                           required
                           errors={errors}
+                          placeholder={placeholder}
                         />
                         )
                   )
@@ -214,6 +223,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
                           onChange={handleChange}
                           required
                           errors={errors}
+                          placeholder={placeholder}
                         />
                         )
                   )
@@ -257,6 +267,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
                           onChange={handleChange}
                           required
                           errors={errors}
+                          placeholder={placeholder}
                         />
                         )
                   )

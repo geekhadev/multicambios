@@ -11,12 +11,7 @@ class ShareExchanges
 {
     public function handle(Request $request, Closure $next)
     {
-        $exchanges = Exchange::with('origin', 'destination', 'bank_origin')->get();
-        if($exchanges->count() > 0) {
-            $exchanges->each(function ($exchange) {
-                $exchange->rate = $exchange->rate;
-            });
-        }
+        $exchanges = Exchange::with('origin', 'destination', 'bank_origin', 'last_rate')->get();
         Inertia::share('globalExchanges', $exchanges);
 
         return $next($request);

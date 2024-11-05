@@ -12,24 +12,24 @@ function calculateProfitPercent (rate, profit) {
 export default function ExchangeConfigRates ({ exchange }) {
   const { data, setData, post, processing, errors } = useForm({
     exchange_id: exchange.id,
-    general_rate: exchange?.last_rate?.general_rate,
-    general_profit: exchange?.last_rate?.general_profit,
-    general_profit_percent: exchange?.last_rate?.general_profit_percent,
-    preference_rate: exchange?.last_rate?.preference_rate,
-    preference_profit: exchange?.last_rate?.preference_profit,
-    preference_profit_percent: exchange?.last_rate?.preference_profit_percent,
-    rate_dolar: exchange?.last_rate?.rate_dolar
+    general_rate: exchange?.last_rate?.general_rate ?? 0,
+    general_profit: exchange?.last_rate?.general_profit ?? 0,
+    general_profit_percent: exchange?.last_rate?.general_profit_percent ?? 0,
+    preference_rate: exchange?.last_rate?.preference_rate ?? 0,
+    preference_profit: exchange?.last_rate?.preference_profit ?? 0,
+    preference_profit_percent: exchange?.last_rate?.preference_profit_percent ?? 0,
+    rate_dolar: exchange?.last_rate?.rate_dolar ?? 0
   })
 
   function handleChange (e) {
     const key = e.target.id
     let value = e.target.value
 
-    value = value ? Number(value) : ''
+    value = value ? parseFloat(value) : ''
 
     const updatedData = {
       ...data,
-      [key]: value
+      [key]: isNaN(value) ? '' : value // Manejar NaN
     }
 
     if (key === 'general_rate' || key === 'general_profit') {
@@ -89,6 +89,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 type={'number'}
                 id={'general_rate'}
                 value={data.general_rate}
+                placeholder={'0.00'}
                 onChange={handleChange}
                 required
                 errors={errors}
@@ -99,6 +100,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'Ganancia tasa general'}
                 type={'number'}
                 id={'general_profit'}
+                placeholder={'0.00'}
                 value={data.general_profit}
                 onChange={handleChange}
                 required
@@ -110,6 +112,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'% Gan. tasa general'}
                 type={'number'}
                 id={'general_profit_percent'}
+                placeholder={'0.00'}
                 value={data.general_profit_percent}
                 onChange={handleChange}
                 required
@@ -124,6 +127,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'Tasa preferencial'}
                 type={'number'}
                 id={'preference_rate'}
+                placeholder={'0.00'}
                 value={data.preference_rate}
                 onChange={handleChange}
                 required
@@ -147,6 +151,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'% Gan. tasa preferencial'}
                 type={'number'}
                 id={'preference_profit_percent'}
+                placeholder={'0.00'}
                 value={data.preference_profit_percent}
                 onChange={handleChange}
                 required
@@ -161,6 +166,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'Tasa dolar'}
                 type={'number'}
                 id={'rate_dolar'}
+                placeholder={'0.00'}
                 value={data.rate_dolar}
                 onChange={handleChange}
                 required
@@ -178,5 +184,5 @@ export default function ExchangeConfigRates ({ exchange }) {
         </form>
       </div>
     </div>
-)
+  )
 }

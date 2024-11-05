@@ -4,8 +4,8 @@ export async function recalculateToReceive ({ rate, inputs, exchange }) {
     const rateResult = setRateTemp({ rateGeneral: rate.general_rate, ammountSend: inputs.ammountSend, inputRate: inputs.inputRate, ammountPreference: exchange.amount_preferential, ratePreference: rate.preference_rate })
     let ammountReceive = parseFloat(inputs.ammountSend) * rateResult
     ammountReceive = (isNaN(ammountReceive) || ammountReceive < 0) ? 0 : ammountReceive
+    ammountReceive = parseFloat(ammountReceive).toFixed(2)
     const rateDollar = parseFloat(ammountReceive / rate.rate_dolar).toFixed(1)
-    console.log({ ammountSend: inputs.ammountSend, ammountReceive, rate: rateResult, rateDollar })
     return { ammountSend: inputs.ammountSend, ammountReceive, rate: rateResult, rateDollar }
   }
 }
@@ -17,6 +17,7 @@ export async function recalculateToSend ({ rate, inputs, exchange }) {
 
     let ammountSend = parseFloat(inputs.ammountReceive) / rateResult
     ammountSend = (isNaN(ammountSend) || ammountSend < 0) ? 0 : ammountSend
+    ammountSend = parseInt(ammountSend)
     const rateDollar = parseFloat(inputs.ammountReceive / rate.rate_dolar).toFixed(1)
 
     return { ammountSend, ammountReceive: inputs.ammountReceive, rate: rateResult, rateDollar }
@@ -33,8 +34,8 @@ export async function recalculateToDollar ({ rate, inputs, exchange }) {
 
     let ammountSend = parseFloat(ammountReceive) / rateResult
     ammountSend = (isNaN(ammountSend) || ammountSend < 0) ? 0 : ammountSend
+    ammountSend = parseInt(ammountSend)
     const rateDollar = parseFloat(ammountReceive / rate.rate_dolar).toFixed(1)
-    console.log({ ammountSend, ammountReceive, rate: rateResult, rateDollar })
     return { ammountSend, ammountReceive, rate: rateResult, rateDollar }
   }
 }
