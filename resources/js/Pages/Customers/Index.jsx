@@ -26,11 +26,12 @@ export default function CountriesIndex ({ customers }) {
               <table className="w-full text-sm text-left rtl:text-right">
                 <thead>
                   <tr className='bg-gray-200 border-t border-b border-gray-300'>
-                    <th scope="col" className="px-3 py-2">País</th>
                     <th scope="col" className="px-3 py-2">Nombre</th>
                     <th scope="col" className="px-3 py-2">Apellido</th>
                     <th scope="col" className="px-3 py-2">Correo</th>
                     <th scope="col" className="px-3 py-2">Teléfono</th>
+                    <th scope="col" className="px-3 py-2">País</th>
+                    <th scope="col" className="px-3 py-2">Estado</th>
                     <th scope="col" className="px-3 py-2 w-24">Confirmado</th>
                     <th scope="col" className="px-3 py-2 w-24">Estado</th>
                     <th scope="col" className="px-3 py-2 w-0"></th>
@@ -39,13 +40,14 @@ export default function CountriesIndex ({ customers }) {
                 <tbody>
                   {customers.map(customer => (
                     <tr key={customer.id} className="odd:bg-white even:bg-gray-50 border-b">
-                      <td className="px-3 py-2">
-                        <CountryWithIcon country={customer.country} />
-                      </td>
                       <td className="px-3 py-2">{customer.first_name}</td>
                       <td className="px-3 py-2">{customer.last_name}</td>
                       <td className="px-3 py-2">{customer.email}</td>
                       <td className="px-3 py-2">{customer.phone}</td>
+                      <td className="px-3 py-2">
+                        <CountryWithIcon country={customer.country}/>
+                      </td>
+                      <td className="px-3 py-2">{customer.state.name}</td>
                       <td className="px-3 py-2">
                         {
                           customer.is_confirmed
@@ -75,7 +77,7 @@ export default function CountriesIndex ({ customers }) {
                 <tfoot>
                 <tr className="bg-gray-100">
                   <td colSpan="8" className="px-3 py-2 font-bold">
-                    Total: {customers.length} elementos
+                  Total: {customers.length} elementos
                   </td>
                 </tr>
                 </tfoot>
