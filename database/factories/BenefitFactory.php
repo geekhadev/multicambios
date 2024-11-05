@@ -15,8 +15,7 @@ class BenefitFactory extends Factory
     {
         $customer = Customer::first();
         return [
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
+            'name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'customer_id' => $customer->id,

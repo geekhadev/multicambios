@@ -12,8 +12,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users');
             $table->enum('document_type', ['passport', 'id'])->default('id');
             $table->string('document_number');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->foreignId('country_id')->constrained('countries');

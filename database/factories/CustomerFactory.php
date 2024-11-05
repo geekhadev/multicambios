@@ -21,8 +21,7 @@ class CustomerFactory extends Factory
         return [
             'document_type' => $this->faker->randomElement(['passport', 'id']),
             'document_number' => $this->faker->unique()->randomNumber(8),
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
+            'name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'country_id' => $cl->id,

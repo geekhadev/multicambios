@@ -27,7 +27,6 @@ export default function CountriesIndex ({ customers }) {
                 <thead>
                   <tr className='bg-gray-200 border-t border-b border-gray-300'>
                     <th scope="col" className="px-3 py-2">Nombre</th>
-                    <th scope="col" className="px-3 py-2">Apellido</th>
                     <th scope="col" className="px-3 py-2">Correo</th>
                     <th scope="col" className="px-3 py-2">Teléfono</th>
                     <th scope="col" className="px-3 py-2">País</th>
@@ -40,8 +39,7 @@ export default function CountriesIndex ({ customers }) {
                 <tbody>
                   {customers.map(customer => (
                     <tr key={customer.id} className="odd:bg-white even:bg-gray-50 border-b">
-                      <td className="px-3 py-2">{customer.first_name}</td>
-                      <td className="px-3 py-2">{customer.last_name}</td>
+                      <td className="px-3 py-2">{customer.name}</td>
                       <td className="px-3 py-2">{customer.email}</td>
                       <td className="px-3 py-2">{customer.phone}</td>
                       <td className="px-3 py-2">

@@ -13,8 +13,7 @@ class Benefit extends Model
 
     protected $fillable = [
         'customer_id',
-        'first_name',
-        'last_name',
+        'name',
     ];
 
     public function customer(): BelongsTo

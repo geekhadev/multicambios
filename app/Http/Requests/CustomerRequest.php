@@ -11,8 +11,7 @@ class CustomerRequest extends FormRequest
         return [
             'user_id' => ['required', 'exists:users'],
             'country_id' => ['required', 'exists:countries'],
-            'first_name' => ['required'],
-            'last_name' => ['required'],
+            'name' => ['required'],
             'email' => ['required', 'email', 'max:254'],
             'phone' => ['required'],
         ];

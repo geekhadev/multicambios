@@ -16,7 +16,7 @@ class BenefitController extends Controller
     {
         $this->authorize('viewAny', Benefit::class);
 
-        $benefits = Benefit::with('customer')->get();
+        $benefits = Benefit::with('customer', 'customer.country')->get();
 
         return Inertia::render('Benefits/Index', [
             'benefits' => $benefits,

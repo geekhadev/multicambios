@@ -10,8 +10,7 @@ class BenefitRequest extends FormRequest
     {
         return [
             'customer_id' => ['required', 'exists:customers'],
-            'first_name' => ['required'],
-            'last_name' => ['required'],
+            'name' => ['required'],
         ];
     }
 

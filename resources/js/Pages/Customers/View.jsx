@@ -5,8 +5,7 @@ import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
 const benefits = [
   {
     id: 1,
-    first_name: 'Juan',
-    last_name: 'Pérez',
+    name: 'Juan Pérez',
     email: 'test@mail.com',
     phone: '1234567890',
     country: { name: 'México' },
@@ -39,7 +38,7 @@ export default function CustomersView ({ customer }) {
             <div className="flex justify-between items-center">
               <div className='flex flex-col'>
                 <h4 className="text-lg font-bold">
-                  Detalles del Cliente {customer.first_name}
+                  Detalles del Cliente {customer.name}
                 </h4>
               </div>
               <div className='flex gap-4'>
@@ -78,7 +77,7 @@ export default function CustomersView ({ customer }) {
                       <span className="font-bold">Nombre</span>
                     </div>
                     <div className="w-full sm:w-3/4">
-                      <span>{customer.first_name} {customer.last_name}</span>
+                      <span>{customer.name}</span>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row justify-between items-center py-2 border-b border-gray-200">
@@ -164,9 +163,8 @@ export default function CustomersView ({ customer }) {
                 <table className="w-full text-sm text-left rtl:text-right">
                   <thead>
                   <tr className="bg-gray-200 border-t border-b border-gray-300">
-                    <th scope="col" className="px-3 py-2">País</th>
                     <th scope="col" className="px-3 py-2">Nombre</th>
-                    <th scope="col" className="px-3 py-2">Apellido</th>
+                    <th scope="col" className="px-3 py-2">País</th>
                     <th scope="col" className="px-3 py-2">Correo</th>
                     <th scope="col" className="px-3 py-2">Teléfono</th>
                   </tr>
@@ -174,9 +172,8 @@ export default function CustomersView ({ customer }) {
                   <tbody>
                   {benefits.map(benefit => (
                     <tr key={customer.id} className="odd:bg-white even:bg-gray-50 border-b">
+                      <td className="px-3 py-2">{benefit.name}</td>
                       <td className="px-3 py-2">{benefit.country.name}</td>
-                      <td className="px-3 py-2">{benefit.first_name}</td>
-                      <td className="px-3 py-2">{benefit.last_name}</td>
                       <td className="px-3 py-2">{benefit.email}</td>
                       <td className="px-3 py-2">{benefit.phone}</td>
                     </tr>

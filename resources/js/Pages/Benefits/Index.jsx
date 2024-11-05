@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
 
 export default function CountriesIndex ({ benefits }) {
   return (
@@ -25,9 +26,9 @@ export default function CountriesIndex ({ benefits }) {
               <table className="w-full text-sm text-left rtl:text-right">
                 <thead>
                   <tr className='bg-gray-200 border-t border-b border-gray-300'>
-                    <th scope="col" className="px-3 py-2">Cliente</th>
                     <th scope="col" className="px-3 py-2">Nombre</th>
-                    <th scope="col" className="px-3 py-2">Apellido</th>
+                    <th scope="col" className="px-3 py-2">País cliente</th>
+                    <th scope="col" className="px-3 py-2">Cliente</th>
                     <th scope="col" className="px-3 py-2 w-24">Estado</th>
                     <th scope="col" className="px-3 py-2 w-0"></th>
                   </tr>
@@ -35,9 +36,11 @@ export default function CountriesIndex ({ benefits }) {
                 <tbody>
                   {benefits.map(benefit => (
                     <tr key={benefit.id} className="odd:bg-white even:bg-gray-50 border-b">
-                      <td className="px-3 py-2">{benefit.customer.first_name}</td>
-                      <td className="px-3 py-2">{benefit.first_name}</td>
-                      <td className="px-3 py-2">{benefit.last_name}</td>
+                      <td className="px-3 py-2">{benefit.name}</td>
+                      <td className="px-3 py-2">
+                        <CountryWithIcon country={benefit.customer.country}/>
+                      </td>
+                      <td className="px-3 py-2">{benefit.customer.name}</td>
                       <td className="px-3 py-2">
                         {
                           benefit.is_active
