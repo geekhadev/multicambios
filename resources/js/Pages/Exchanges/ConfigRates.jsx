@@ -89,6 +89,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 type={'number'}
                 id={'general_rate'}
                 value={data.general_rate}
+                placeholder={'0.00'}
                 onChange={handleChange}
                 required
                 errors={errors}
@@ -99,6 +100,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'Ganancia tasa general'}
                 type={'number'}
                 id={'general_profit'}
+                placeholder={'0.00'}
                 value={data.general_profit}
                 onChange={handleChange}
                 required
@@ -110,6 +112,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'% Gan. tasa general'}
                 type={'number'}
                 id={'general_profit_percent'}
+                placeholder={'0.00'}
                 value={data.general_profit_percent}
                 onChange={handleChange}
                 required
@@ -124,6 +127,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'Tasa preferencial'}
                 type={'number'}
                 id={'preference_rate'}
+                placeholder={'0.00'}
                 value={data.preference_rate}
                 onChange={handleChange}
                 required
@@ -147,6 +151,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'% Gan. tasa preferencial'}
                 type={'number'}
                 id={'preference_profit_percent'}
+                placeholder={'0.00'}
                 value={data.preference_profit_percent}
                 onChange={handleChange}
                 required
@@ -161,6 +166,7 @@ export default function ExchangeConfigRates ({ exchange }) {
                 label={'Tasa dolar'}
                 type={'number'}
                 id={'rate_dolar'}
+                placeholder={'0.00'}
                 value={data.rate_dolar}
                 onChange={handleChange}
                 required
