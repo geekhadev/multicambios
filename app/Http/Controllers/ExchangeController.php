@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateRateRequest;
 use App\Http\Requests\Exchange\StoreExchangeRequest;
 use App\Http\Requests\Exchange\UpdateExchangeRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Inertia\Inertia;
 use App\Models\Exchange;
 use App\Models\Bank;
 use App\Models\Rate;
-use Inertia\Inertia;
-use Inertia\Response;
-use Illuminate\Http\Request;
 
 class ExchangeController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // TODO: add policy validation (form file)
+        $this->authorize('viewAny', Exchange::class);
 
         $exchanges = Exchange::
             with(
@@ -62,6 +64,8 @@ class ExchangeController extends Controller
      */
     public function edit(Exchange $exchange)
     {
+        // TODO: add policy validation (form file)
+
         $exchange = Exchange::
             with(
                 'origin',
@@ -117,7 +121,7 @@ class ExchangeController extends Controller
         //
     }
 
-    public function rate(Request $request)
+    public function rate(CreateRateRequest $request)
     {
         // TODO: add policy validation (form file)
         // TODO: add request validation (form file)

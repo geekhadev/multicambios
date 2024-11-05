@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Exchange;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ExchangePolicy
 {
@@ -21,7 +20,7 @@ class ExchangePolicy
      */
     public function view(User $user, Exchange $exchange): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -29,7 +28,7 @@ class ExchangePolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**

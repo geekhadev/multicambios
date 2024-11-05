@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Requests\Exchange;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateExchangeRequest extends FormRequest
+class CreateRateRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
-            //
+
         ];
     }
 
