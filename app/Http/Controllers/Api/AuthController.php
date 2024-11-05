@@ -89,4 +89,17 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'tokens revoked']);
     }
+
+    public function user()
+    {
+        try {
+            if(!auth()->user()) {
+                return response()->json(['message' => 'Unauthenticated'], 401);
+            }
+
+            return auth()->user();
+        } catch (Exception $err) {
+            return response()->json(['message' => $err->getMessage()], 500);
+        }
+    }
 }
