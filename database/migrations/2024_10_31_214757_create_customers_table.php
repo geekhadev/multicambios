@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->enum('document_type', ['passport', 'id'])->default('id');
             $table->string('document_number');
             $table->string('name');
-            $table->string('email');
-            $table->string('phone');
+            $table->string('email')->nullable()->unique();
+            $table->string('phone')->nullable()->unique();
             $table->foreignId('country_id')->constrained('countries');
             $table->foreignId('state_id')->constrained('states');
             $table->text('address')->nullable();
