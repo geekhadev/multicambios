@@ -66,7 +66,8 @@ class ExchangeController extends Controller
             with(
                 'origin',
                 'destination',
-                'bank_origin'
+                'bank_origin',
+                'last_rate'
             )
             ->find($exchange->id);
 
@@ -75,15 +76,9 @@ class ExchangeController extends Controller
             ->where('is_active', true)
             ->get();
 
-        $rate = Rate::
-            where('exchange_id', $exchange->id)
-            ->latest()
-            ->first();
-
         return Inertia::render('Exchanges/Config', [
             'exchange' => $exchange,
-            'banks' => $banks,
-            'rate' => $rate,
+            'banks' => $banks
         ]);
     }
 

@@ -9,16 +9,16 @@ function calculateProfitPercent (rate, profit) {
   return (profit / rate) * 100
 }
 
-export default function ExchangeConfigRates ({ exchange, rate }) {
+export default function ExchangeConfigRates ({ exchange }) {
   const { data, setData, post, processing, errors } = useForm({
     exchange_id: exchange.id,
-    general_rate: rate.general_rate,
-    general_profit: rate.general_profit,
-    general_profit_percent: rate.general_profit_percent,
-    preference_rate: rate.preference_rate,
-    preference_profit: rate.preference_profit,
-    preference_profit_percent: rate.preference_profit_percent,
-    rate_dolar: rate.rate_dolar
+    general_rate: exchange?.last_rate?.general_rate,
+    general_profit: exchange?.last_rate?.general_profit,
+    general_profit_percent: exchange?.last_rate?.general_profit_percent,
+    preference_rate: exchange?.last_rate?.preference_rate,
+    preference_profit: exchange?.last_rate?.preference_profit,
+    preference_profit_percent: exchange?.last_rate?.preference_profit_percent,
+    rate_dolar: exchange?.last_rate?.rate_dolar
   })
 
   function handleChange (e) {
@@ -58,14 +58,22 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
   return (
     <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 col-span-2">
       {
-        rate && new Date(rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString() && (
+        (exchange.last_rate && new Date(exchange.last_rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString()) && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <strong className="font-bold">¡Atención!</strong>
-            <span className="block sm:inline"> Última actualización de la tasa: {new Date(rate.timestamp).toLocaleString()}</span>
+            <span className="block sm:inline"> Última actualización de la tasa: {new Date(exchange.last_rate.timestamp).toLocaleString()}</span>
           </div>
         )
       }
-      <div className="flex justify-between items-center">
+      {
+        !exchange.last_rate && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong className="font-bold">¡Atención!</strong>
+            <span className="block sm:inline"> Debe configurar la tasa de cambio</span>
+          </div>
+        )
+      }
+      <div className="flex justify-between items-center mt-2">
         <div className='flex flex-col'>
           <h4 className="text-lg font-bold">
             Configuración de tasas
@@ -73,78 +81,94 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
         </div>
       </div>
       <div className="relative overflow-x-auto pt-2">
-        <form onSubmit={submit} className='flex flex-col gap-2'>
-          <div className='flex gap-2'>
-            <Input
-              label={'Tasa general'}
-              type={'number'}
-              id={'general_rate'}
-              value={data.general_rate}
-              onChange={handleChange}
-              required
-              errors={errors}
-            />
-            <Input
-              label={'Ganancia tasa general'}
-              type={'number'}
-              id={'general_profit'}
-              value={data.general_profit}
-              onChange={handleChange}
-              required
-              errors={errors}
-            />
-            <Input
-              label={'% Gan. tasa general'}
-              type={'number'}
-              id={'general_profit_percent'}
-              value={data.general_profit_percent}
-              onChange={handleChange}
-              required
-              readOnly
-              errors={errors}
-            />
+        <form onSubmit={submit} className="flex flex-col gap-2">
+          <div className="grid grid-cols-3">
+            <div className="grid-cols-1">
+              <Input
+                label={'Tasa general'}
+                type={'number'}
+                id={'general_rate'}
+                value={data.general_rate}
+                onChange={handleChange}
+                required
+                errors={errors}
+              />
+            </div>
+            <div className="grid-cols-1">
+              <Input
+                label={'Ganancia tasa general'}
+                type={'number'}
+                id={'general_profit'}
+                value={data.general_profit}
+                onChange={handleChange}
+                required
+                errors={errors}
+              />
+            </div>
+            <div className="grid-cols-1">
+              <Input
+                label={'% Gan. tasa general'}
+                type={'number'}
+                id={'general_profit_percent'}
+                value={data.general_profit_percent}
+                onChange={handleChange}
+                required
+                readOnly
+                errors={errors}
+              />
+            </div>
           </div>
-          <div className='flex gap-2'>
-            <Input
-              label={'Tasa preferencial'}
-              type={'number'}
-              id={'preference_rate'}
-              value={data.preference_rate}
-              onChange={handleChange}
-              required
-              readOnly
-              errors={errors}
-            />
-            <Input
-              label={'Ganancia tasa preferencial'}
-              type={'number'}
-              id={'preference_profit'}
-              value={data.preference_profit}
-              onChange={handleChange}
-              required
-              errors={errors}
-            />
-            <Input
-              label={'% Gan. tasa preferencial'}
-              type={'number'}
-              id={'preference_profit_percent'}
-              value={data.preference_profit_percent}
-              onChange={handleChange}
-              required
-              readOnly
-              errors={errors}
-            />
-            <Input
-              label={'Tasa dolar'}
-              type={'number'}
-              id={'rate_dolar'}
-              value={data.rate_dolar}
-              onChange={handleChange}
-              required
-              errors={errors}
-            />
+          <div className="grid grid-cols-3">
+            <div className="grid-cols-1">
+              <Input
+                label={'Tasa preferencial'}
+                type={'number'}
+                id={'preference_rate'}
+                value={data.preference_rate}
+                onChange={handleChange}
+                required
+                readOnly
+                errors={errors}
+              />
+            </div>
+            <div className="grid-cols-1">
+              <Input
+                label={'Ganancia tasa preferencial'}
+                type={'number'}
+                id={'preference_profit'}
+                value={data.preference_profit}
+                onChange={handleChange}
+                required
+                errors={errors}
+              />
+            </div>
+            <div className="grid-cols-1">
+              <Input
+                label={'% Gan. tasa preferencial'}
+                type={'number'}
+                id={'preference_profit_percent'}
+                value={data.preference_profit_percent}
+                onChange={handleChange}
+                required
+                readOnly
+                errors={errors}
+              />
+            </div>
           </div>
-          <div className='px-0.5'>
+          <div className="grid grid-cols-3">
+            <div className="grid-cols-1">
+              <Input
+                label={'Tasa dolar'}
+                type={'number'}
+                id={'rate_dolar'}
+                value={data.rate_dolar}
+                onChange={handleChange}
+                required
+                errors={errors}
+              />
+            </div>
+          </div>
+          <div className="px-0.5">
             <Button
               label="Guardar tasa de cambio"
               type="submit"
@@ -154,5 +178,5 @@ export default function ExchangeConfigRates ({ exchange, rate }) {
         </form>
       </div>
     </div>
-  )
+)
 }
