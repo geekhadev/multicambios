@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained();
-            $table->string('name')->unique();
-            $table->string('account_prefix')->unique();
+            $table->string('name');
+            $table->string('account_prefix');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
