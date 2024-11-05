@@ -53,17 +53,17 @@ export default function WidgetCalculator () {
   useEffect(() => {
     const exchange = globalExchanges.find((exchange) => exchange.id === selectedExchange)
     if (exchange) {
-      if (exchange.rate) {
-        setRate(exchange.rate)
+      if (exchange.last_rate) {
+        setRate(exchange.last_rate)
         const initialInputs = {
           ammountSend: exchange.amount_min,
           ammountReceive: exchange.amount_min,
-          inputRate: exchange.rate.general_rate,
-          inputDollar: exchange.rate.rate_dolar
+          inputRate: exchange.last_rate.general_rate,
+          inputDollar: exchange.last_rate.rate_dolar
         }
         setInputs(initialInputs)
 
-        recalculateToReceive({ rate: exchange.rate, inputs: initialInputs, exchange }).then((result) => {
+        recalculateToReceive({ rate: exchange.last_rate, inputs: initialInputs, exchange }).then((result) => {
           setInputs({
             ...initialInputs,
             ammountSend: result.ammountSend,
@@ -125,9 +125,6 @@ export default function WidgetCalculator () {
           onChange={handleInputChange}
           readOnly
         />
-        <div className="input-group-addon copy-msg-information" style={{ height: '34px', borderRadius: '2pt', width: '45px' }} data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Da click aquí para copiar la tasa del dia y los datos bancarios">
-          <i className="fa fa-copy"></i>
-        </div>
       </div>
     </form>
   )
