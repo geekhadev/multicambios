@@ -59,7 +59,7 @@ export default function WidgetCalculator () {
           ammountSend: exchange.amount_min,
           ammountReceive: exchange.amount_min,
           inputRate: exchange.last_rate.general_rate,
-          inputDollar: exchange.last_rate.rate_dolar
+          inputDollar: exchange.last_rate.rate_dollar
         }
         setInputs(initialInputs)
 
@@ -89,7 +89,7 @@ export default function WidgetCalculator () {
         >
           <option value="">{'Selecciona una opción'}</option>
           {globalExchanges.map((exchange) => (
-            <option key={exchange.id} value={exchange.id} disabled={rate === null || new Date(rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString()}>
+            <option key={exchange.id} value={exchange.id} disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}>
               {exchange.origin.name} {' > '} {exchange.destination.name}
             </option>
           ))}
@@ -100,7 +100,7 @@ export default function WidgetCalculator () {
           id='ammountSend'
           onChange={handleInputChange}
           value={parseInt(inputs.ammountSend)}
-          disabled={rate === null || new Date(rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString()}
+          disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
         />
         <input
           placeholder={'Monto a recibir'}
@@ -108,7 +108,7 @@ export default function WidgetCalculator () {
           id='ammountReceive'
           onChange={handleInputChange}
           value={inputs.ammountReceive}
-          disabled={rate === null || new Date(rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString()}
+          disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
         />
         <input
           placeholder={'Dolares a recibir'}

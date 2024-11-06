@@ -46,9 +46,9 @@ export default function ExchangesIndex ({ exchanges }) {
                         </div>
                       </td>
                       <td className="px-3 py-2 whitespace-nowrap">
-                        <span className='text-xs'>Min: {exchange.amount_min}</span><br />
-                        <span className='text-xs'>Max: {exchange.amount_max}</span><br />
-                        <span className='text-xs'>Pref: {exchange.amount_preferential}</span>
+                        <span className='text-xs'>Min: {parseInt(exchange.amount_min)}</span><br />
+                        <span className='text-xs'>Max: {parseInt(exchange.amount_max)}</span><br />
+                        <span className='text-xs'>Pref: {parseInt(exchange.amount_preferential)}</span>
                       </td>
                       <td className="px-3 py-2 whitespace-nowrap">
                         <span className='text-xs font-bold'>{exchange.bank_origin.name}</span><br />

@@ -7,6 +7,8 @@ use App\Http\Requests\Exchange\StoreExchangeRequest;
 use App\Http\Requests\Exchange\UpdateExchangeRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Inertia\Inertia;
+use App\Models\DocumentType;
+use App\Models\AccountType;
 use App\Models\Exchange;
 use App\Models\Bank;
 use App\Models\Rate;
@@ -82,9 +84,15 @@ class ExchangeController extends Controller
             ->where('is_active', true)
             ->get();
 
+        $types_account = AccountType::get();
+        $document_type = DocumentType::get();
+        //dd($types_account->toArray());
+
         return Inertia::render('Exchanges/Config', [
             'exchange' => $exchange,
-            'banks' => $banks
+            'banks' => $banks,
+            'types_account' => $types_account,
+            'document_type' => $document_type,
         ]);
     }
 
@@ -104,8 +112,8 @@ class ExchangeController extends Controller
         $object->amount_preferential = $request->amount_preferential;
         $object->bank_origin_id = $request->bank_origin_id;
         $object->bank_origin_account_number = $request->bank_origin_account_number;
-        $object->bank_origin_account_type = $request->bank_origin_account_type;
-        $object->bank_origin_owner_document_type = $request->bank_origin_owner_document_type;
+        $object->bank_origin_account_type_id = $request->bank_origin_account_type_id;
+        $object->bank_origin_owner_document_type_id = $request->bank_origin_owner_document_type_id;
         $object->bank_origin_owner_document_number = $request->bank_origin_owner_document_number;
         $object->bank_origin_owner_name = $request->bank_origin_owner_name;
         $object->bank_origin_owner_phone = $request->bank_origin_owner_phone;
@@ -127,21 +135,6 @@ class ExchangeController extends Controller
     {
         // TODO: add policy validation (form file)
         // TODO: add request validation (form file)
-        /*
-            TODO: fix error create rate
-            SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'general_rate' at row 1 (Connection: mysql, SQL: insert into `rates` (`exchange_id`, `general_rate`, `general_profit`, `general_profit_percent`, `preference_rate`, `preference_profit`, `preference_profit_percent`, `rate_dolar`, `timestamp`, `updated_at`, `created_at`) values (1, 200000, 1000, 0.5, 199500, 500, 0.25, 12, 2024-11-04 18:16:28, 2024-11-04 18:16:28, 2024-11-04 18:16:28))
-            with this payload:
-            {
-                "exchange_id": 1,
-                "general_rate": 200000,
-                "general_profit": 1000,
-                "general_profit_percent": 0.5,
-                "preference_rate": 199500,
-                "preference_profit": 500,
-                "preference_profit_percent": 0.25,
-                "rate_dolar": 12
-            }
-        */
 
         $rate = new Rate();
         $rate->exchange_id = $request->exchange_id;
@@ -151,9 +144,7 @@ class ExchangeController extends Controller
         $rate->preference_rate = $request->preference_rate;
         $rate->preference_profit = $request->preference_profit;
         $rate->preference_profit_percent = $request->preference_profit_percent;
-        $rate->rate_dolar = $request->rate_dolar;
-        // TODO: this should generate automatically
-        $rate->timestamp = now();
+        $rate->rate_dollar = $request->rate_dollar;
         $rate->save();
     }
 

@@ -5,9 +5,8 @@ import Select from '../../Components/Form/Select'
 import { Accordion } from 'flowbite-react'
 import { toast } from 'sonner'
 
-export default function ExchangeConfigGeneral ({ exchange, banks }) {
+export default function ExchangeConfigGeneral ({ exchange, banks, types_account, document_type }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
-
   function handleChange (e) {
     const key = e.target.id
     const value = e.target.value
@@ -60,51 +59,20 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
       type: 'text',
       placeholder: '1234567890'
     },
-    // TODO: este selector debe crearse con los datos de la tabla de la base de datos
     {
-      key: 'bank_origin_account_type',
+      key: 'bank_origin_account_type_id',
       label: 'Tipo de cuenta',
       type: 'select',
-      options: [
-        {
-          value: 'Ahorro',
-          label: 'Ahorro'
-        },
-        {
-          value: 'Corriente',
-          label: 'Corriente'
-        },
-        {
-          value: 'Vista/RUT',
-          label: 'Vista/RUT'
-        }
-      ]
+      options: types_account.map((type) => ({ value: type.id, label: type.name }))
     }
   ]
-  // TODO: falta un selector de tipo de documento
+
   const INPUTS_OWNER = [
     {
-      key: 'bank_origin_owner_document_type',
+      key: 'bank_origin_owner_document_type_id',
       label: 'Tipo de documento',
       type: 'select',
-      options: [
-        {
-          value: 'Cédula',
-          label: 'Cédula'
-        },
-        {
-          value: 'DNI',
-          label: 'DNI'
-        },
-        {
-          value: 'Pasaporte',
-          label: 'Pasaporte'
-        },
-        {
-          value: 'RUT',
-          label: 'RUT'
-        }
-      ]
+      options: document_type.map((type) => ({ value: type.id, label: type.name }))
     },
     {
       key: 'bank_origin_owner_document_number',

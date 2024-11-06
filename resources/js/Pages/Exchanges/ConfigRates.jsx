@@ -18,7 +18,7 @@ export default function ExchangeConfigRates ({ exchange }) {
     preference_rate: exchange?.last_rate?.preference_rate ?? 0,
     preference_profit: exchange?.last_rate?.preference_profit ?? 0,
     preference_profit_percent: exchange?.last_rate?.preference_profit_percent ?? 0,
-    rate_dolar: exchange?.last_rate?.rate_dolar ?? 0
+    rate_dollar: exchange?.last_rate?.rate_dollar ?? 0
   })
 
   function handleChange (e) {
@@ -58,10 +58,10 @@ export default function ExchangeConfigRates ({ exchange }) {
   return (
     <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 col-span-2">
       {
-        (exchange.last_rate && new Date(exchange.last_rate.timestamp).toLocaleDateString() < new Date().toLocaleDateString()) && (
+        (exchange.last_rate && new Date(exchange.last_rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()) && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <strong className="font-bold">¡Atención!</strong>
-            <span className="block sm:inline"> Última actualización de la tasa: {new Date(exchange.last_rate.timestamp).toLocaleString()}</span>
+            <span className="block sm:inline"> Última actualización de la tasa: {new Date(exchange.last_rate.created_at).toLocaleString()}</span>
           </div>
         )
       }
@@ -165,9 +165,9 @@ export default function ExchangeConfigRates ({ exchange }) {
               <Input
                 label={'Tasa dolar'}
                 type={'number'}
-                id={'rate_dolar'}
+                id={'rate_dollar'}
                 placeholder={'0.00'}
-                value={data.rate_dolar}
+                value={data.rate_dollar}
                 onChange={handleChange}
                 required
                 errors={errors}
