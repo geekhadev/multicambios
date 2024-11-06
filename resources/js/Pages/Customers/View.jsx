@@ -29,7 +29,7 @@ const transactions = [
 export default function CustomersView ({ customer }) {
   console.log(customer)
   return (
-    <AuthenticatedLayout module={'Clientes'} action={'Detalles'}>
+    <AuthenticatedLayout module="Clientes" action="Detalles">
       <Head title="Clientes" />
 
       <div>

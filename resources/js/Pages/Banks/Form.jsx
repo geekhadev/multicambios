@@ -20,7 +20,7 @@ export default function BanksForm () {
   }
 
   return (
-    <AuthenticatedLayout module={'Bancos'} action={'Crear'}>
+    <AuthenticatedLayout module="Bancos" action="Crear">
       <Head title="Bancos" />
 
       <div>

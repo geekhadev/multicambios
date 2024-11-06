@@ -5,7 +5,7 @@ import ExchangeConfigRates from './ConfigRates'
 
 export default function ExchangeConfig ({ exchange, banks, rate, types_account, document_type }) {
   return (
-    <AuthenticatedLayout module={'Exchange'} action={'Configurar'}>
+    <AuthenticatedLayout module="Exchange" action="Configurar">
       <Head title={`${exchange.origin.name} a ${exchange.destination.name}`} />
 
       <div>

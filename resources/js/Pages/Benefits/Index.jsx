@@ -4,7 +4,7 @@ import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
 
 export default function CountriesIndex ({ benefits }) {
   return (
-    <AuthenticatedLayout module={'Beneficiarios'}>
+    <AuthenticatedLayout module="Beneficiarios">
       <Head title="Beneficiarios" />
 
       <div>
