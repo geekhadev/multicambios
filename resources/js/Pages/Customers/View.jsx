@@ -92,6 +92,26 @@ export default function CustomersView ({ customer }) {
                   </div>
                   <div className="flex flex-col sm:flex-row justify-between items-center py-2 border-b border-gray-200">
                     <div className="w-full sm:w-1/4">
+                      <span className="font-bold">
+                        Email
+                      </span>
+                    </div>
+                    <div className="w-full sm:w-3/4">
+                      <span>{customer.email}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row justify-between items-center py-2 border-b border-gray-200">
+                    <div className="w-full sm:w-1/4">
+                      <span className="font-bold">
+                        Telefono
+                      </span>
+                    </div>
+                    <div className="w-full sm:w-3/4">
+                      <span>{customer.phone}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row justify-between items-center py-2 border-b border-gray-200">
+                    <div className="w-full sm:w-1/4">
                       <span className="font-bold">Dirección</span>
                     </div>
                     <div className="w-full sm:w-3/4">
