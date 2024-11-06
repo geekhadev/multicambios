@@ -1,6 +1,6 @@
 # MultiCambios
 
-Este proyecto es una plataforma administrativa de la empresa de enveio de remesas MultiCambios. Es una plataforma web que administra toda la logística de la empresa, desde la creación de usuarios, generación de remesas, reportes, etc.
+Este proyecto es una plataforma administrativa de la empresa de envío de remesas MultiCambios. Es una plataforma web que administra toda la logística de la empresa, desde la creación de usuarios, generación de remesas, reportes, etc.
 
 ## Instalación
 

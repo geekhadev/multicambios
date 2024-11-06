@@ -26,7 +26,9 @@ class ExchangeController extends Controller
             with(
                 'origin',
                 'destination',
-                'bank_origin'
+                'bank_origin',
+                'document_type_owner',
+                'bank_origin_account_type'
             )
             ->get();
 
@@ -71,7 +73,7 @@ class ExchangeController extends Controller
                 'origin',
                 'destination',
                 'bank_origin',
-                'last_rate'
+                'last_rate',
             )
             ->find($exchange->id);
 

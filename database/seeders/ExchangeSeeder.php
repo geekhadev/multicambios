@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\AccountType;
+use App\Models\DocumentType;
 use Illuminate\Database\Seeder;
 use App\Models\Exchange;
 use App\Models\Country;
@@ -24,7 +26,7 @@ class ExchangeSeeder extends Seeder
 
         $veBanksIds = Bank::
             where('country_id', $ve->id)
-            ->where('account_prefix', '0102')
+            ->whereIn('account_prefix', ['0102', '0114', '0105'])
             ->pluck('id')
             ->toArray();
 
@@ -36,9 +38,9 @@ class ExchangeSeeder extends Seeder
             'amount_preferential' => 100000,
             'bank_origin_id' => $clBank->id,
             'bank_origin_account_number' => '1234567890',
-            'bank_origin_account_type' => 'Corriente',
-            'bank_origin_owner_document_type' => 'RUT',
-            'bank_origin_owner_document_number' => '12345678-9',
+            'bank_origin_account_type_id' => AccountType::where('name', 'Corriente')->first()->id,
+            'bank_origin_owner_document_type_id' => DocumentType::where('name', 'RUT')->first()->id,
+            'bank_origin_owner_document_number' => '11111111-1',
             'bank_origin_owner_name' => 'Munticambios SPA',
             'bank_origin_owner_phone' => '+56912345678',
             'bank_origin_owner_email' => 'pagos@multicambios.cl',

@@ -37,10 +37,15 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             StateSeeder::class,
             BankSeeder::class,
-            ExchangeSeeder::class,
+
+            AccountTypeSeeder::class,
+            DocumentTypeSeeder::class,
+            PaymentMethodSeeder::class,
 
             CustomerSeeder::class,
-            BenefitSeeder::class
+            BenefitSeeder::class,
+
+            ExchangeSeeder::class
         ]);
     }
 }

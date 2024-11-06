@@ -11,24 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exchanges', function (Blueprint $table) {
+        $amount_integer = config('multicambios.amount_integer');
+        $amount_decimal = config('multicambios.amount_decimal');
+
+        Schema::create('exchanges', function (Blueprint $table) use ($amount_integer, $amount_decimal) {
             $table->id();
             $table->foreignId('country_origin_id')->constrained()->references('id')->on('countries');
             $table->foreignId('country_destination_id')->constrained()->references('id')->on('countries');
-            $table->decimal('amount_min', 10, 2);
-            $table->decimal('amount_max', 10, 2);
-            $table->decimal('amount_preferential', 10, 2);
+            $table->decimal('amount_min', $amount_integer, $amount_decimal);
+            $table->decimal('amount_max', $amount_integer, $amount_decimal);
+            $table->decimal('amount_preferential', $amount_integer, $amount_decimal);
             $table->foreignId('bank_origin_id')->constrained()->references('id')->on('banks');
+            $table->foreignId('bank_origin_account_type_id')->constrained('account_types');
             $table->string('bank_origin_account_number');
-            $table->enum('bank_origin_account_type', ['Corriente', 'Ahorro', 'Vista/RUT']);
-            // TODO: quizás estoy hay que estandarizarlo con los mismos tipos que hay en el enum de customer
-            $table->enum('bank_origin_owner_document_type', ['Cédula', 'DNI', 'Pasaporte', 'RUT']);
+            $table->foreignId('bank_origin_owner_document_type_id')->constrained('document_types');
             $table->string('bank_origin_owner_document_number');
             $table->string('bank_origin_owner_name');
             $table->string('bank_origin_owner_phone');
             $table->string('bank_origin_owner_email');
             $table->json('banks_destinations_ids');
-            // TODO: quizás se necesita otro estado aparte del is_active para poder manejar el (pendiente, procesando, etc)...
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

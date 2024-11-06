@@ -60,6 +60,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
       type: 'text',
       placeholder: '1234567890'
     },
+    // TODO: este selector debe crearse con los datos de la tabla de la base de datos
     {
       key: 'bank_origin_account_type',
       label: 'Tipo de cuenta',
@@ -80,6 +81,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks }) {
       ]
     }
   ]
+  // TODO: falta un selector de tipo de documento
   const INPUTS_OWNER = [
     {
       key: 'bank_origin_owner_document_type',

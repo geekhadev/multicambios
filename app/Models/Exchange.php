@@ -31,6 +31,11 @@ class Exchange extends Model
         return $this->belongsTo(Bank::class, 'bank_origin_id');
     }
 
+    public function bank_origin_account_type(): BelongsTo
+    {
+        return $this->belongsTo(AccountType::class, 'bank_origin_account_type_id');
+    }
+
     public function rates(): HasMany
     {
         return $this->hasMany(Rate::class);
@@ -39,5 +44,10 @@ class Exchange extends Model
     public function  last_rate(): HasOne
     {
         return $this->hasOne(Rate::class)->latest();
+    }
+
+    public function document_type_owner(): BelongsTo
+    {
+        return $this->belongsTo(DocumentType::class, 'bank_origin_owner_document_type_id');
     }
 }

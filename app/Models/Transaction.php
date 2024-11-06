@@ -11,12 +11,8 @@ class Transaction extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $fillable = [
-        'customer_id',
-        'exchange_id',
-        'send_ammount',
-        'receive_ammount',
-    ];
+    protected $fillable = ['*'];
+
 
     public function customer(): BelongsTo
     {
@@ -26,5 +22,20 @@ class Transaction extends Model
     public function exchange(): BelongsTo
     {
         return $this->belongsTo(Exchange::class);
+    }
+
+    public function rate(): BelongsTo
+    {
+        return $this->belongsTo(Rate::class);
+    }
+
+    public function confirmed_by(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'confirmed_by_id');
+    }
+
+    public function paid_by(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'paid_by_id');
     }
 }

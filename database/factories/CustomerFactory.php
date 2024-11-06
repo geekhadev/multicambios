@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Country;
+use App\Models\DocumentType;
 use App\Models\State;
 use App\Models\Customer;
 use App\Models\User;
@@ -19,17 +20,17 @@ class CustomerFactory extends Factory
         $state = State::where('country_id', $cl->id)->inRandomOrder()->first();
 
         return [
-            'document_type' => $this->faker->randomElement(['passport', 'id']),
+            'user_id' => User::factory(),
+            'document_type_id' => DocumentType::inRandomOrder()->first(),
+            'country_id' => $cl->id,
+            'state_id' => $state->id,
             'document_number' => $this->faker->unique()->randomNumber(8),
             'name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
-            'country_id' => $cl->id,
-            'state_id' => $state->id,
             'address' => $this->faker->address(),
             'occupation' => $this->faker->jobTitle(),
             'politically_exposed' => $this->faker->boolean(),
-            'user_id' => User::factory(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

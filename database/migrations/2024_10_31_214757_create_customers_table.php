@@ -9,14 +9,14 @@ return new class extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->enum('document_type', ['passport', 'id'])->default('id');
+            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('document_type_id')->constrained('document_types');
+            $table->foreignId('country_id')->constrained('countries');
+            $table->foreignId('state_id')->constrained('states');
             $table->string('document_number');
             $table->string('name');
             $table->string('email')->nullable()->unique();
             $table->string('phone')->nullable()->unique();
-            $table->foreignId('country_id')->constrained('countries');
-            $table->foreignId('state_id')->constrained('states');
             $table->text('address')->nullable();
             $table->string('occupation')->nullable();
             $table->boolean('politically_exposed')->default(false);

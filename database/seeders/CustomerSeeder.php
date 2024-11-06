@@ -15,7 +15,7 @@ class CustomerSeeder extends Seeder
     {
         $cl = Country::where('prefix', 'CL')->first();
 
-        Customer::factory()->count(10)->create([
+        Customer::factory()->count(30)->create([
             'country_id' => $cl->id,
         ]);
     }

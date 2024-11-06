@@ -12,6 +12,6 @@ class BenefitSeeder extends Seeder
      */
     public function run(): void
     {
-        Benefit::factory()->count(10)->create();
+        Benefit::factory()->count(80)->create();
     }
 }

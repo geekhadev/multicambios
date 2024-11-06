@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rates', function (Blueprint $table) {
+        $amount_integer = config('multicambios.amount_integer');
+        $amount_decimal = config('multicambios.amount_decimal');
+        $percentage_decimal = config('multicambios.percentage_decimal');
+
+        Schema::create('rates', function (Blueprint $table) use ($amount_integer, $amount_decimal, $percentage_decimal) {
             $table->id();
             $table->foreignId('exchange_id')->constrained();
-            $table->timestamp('timestamp')->default(now());
-            $table->decimal('general_rate', 10, 5);
-            $table->decimal('general_profit', 10, 5);
-            $table->decimal('general_profit_percent', 10, 2);
-            $table->decimal('preference_rate', 10, 5);
-            $table->decimal('preference_profit', 10, 5);
-            $table->decimal('preference_profit_percent', 10, 2);
-            $table->decimal('rate_dolar', 10, 2);
+            $table->decimal('general_rate', $amount_integer, $amount_decimal);
+            $table->decimal('general_profit', $amount_integer, $amount_decimal);
+            $table->decimal('general_profit_percent', $amount_integer, $percentage_decimal);
+            $table->decimal('preference_rate', $amount_integer, $amount_decimal);
+            $table->decimal('preference_profit', $amount_integer, $amount_decimal);
+            $table->decimal('preference_profit_percent', $amount_integer, $percentage_decimal);
+            $table->decimal('rate_dollar', $amount_integer, $percentage_decimal);
             $table->timestamps();
         });
     }

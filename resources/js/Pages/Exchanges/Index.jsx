@@ -53,13 +53,13 @@ export default function ExchangesIndex ({ exchanges }) {
                       <td className="px-3 py-2 whitespace-nowrap">
                         <span className='text-xs font-bold'>{exchange.bank_origin.name}</span><br />
                         <span className='text-xs'>
-                          {exchange.bank_origin_account_type}: {exchange.bank_origin_account_number}
+                          {exchange.bank_origin_account_type.name}: {exchange.bank_origin_account_number}
                         </span>
                       </td>
                       <td className="px-3 py-2 whitespace-nowrap">
                         <span className='text-xs font-bold'>{exchange.bank_origin_owner_name}</span><br />
                         <span className='text-xs'>
-                          {exchange.bank_origin_owner_document_type}: {exchange.bank_origin_owner_document_number}
+                          {exchange.document_type_owner.name}: {exchange.bank_origin_owner_document_number}
                         </span><br />
                         <span className='text-xs'>{exchange.bank_origin_owner_phone}</span><br />
                         <span className='text-xs'>{exchange.bank_origin_owner_email}</span>
