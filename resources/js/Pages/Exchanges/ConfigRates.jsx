@@ -2,12 +2,7 @@ import { useForm } from '@inertiajs/react'
 import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
 import { toast } from 'sonner'
-
-// TODO: agregar esto a un utils reusable
-function calculateProfitPercent (rate, profit) {
-  if (!rate || !profit) return 0
-  return (profit / rate) * 100
-}
+import { calculateProfitPercent } from '../../Utils/Calculator'
 
 export default function ExchangeConfigRates ({ exchange }) {
   const { data, setData, post, processing, errors } = useForm({
