@@ -25,8 +25,7 @@ class CustomerController extends Controller
     {
         $this->authorize('view', $customer);
 
-        $customer->load('country', 'state');
-
+        $customer->load('country', 'state', 'benefits.country');
         return Inertia::render('Customers/View', [
             'customer' => $customer,
         ]);
