@@ -2,19 +2,6 @@ import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
 
-const benefits = [
-  {
-    id: 1,
-    name: 'Juan Pérez',
-    email: 'test@mail.com',
-    phone: '1234567890',
-    country: { name: 'México' },
-    bank: 'Banamex',
-    account_type: 'Ahorro',
-    account_number: '1234567890'
-  }
-]
-
 const transactions = [
   {
     id: 1,
@@ -27,7 +14,6 @@ const transactions = [
 ]
 
 export default function CustomersView ({ customer }) {
-  console.log(customer)
   return (
     <AuthenticatedLayout module="Clientes" action="Detalles">
       <Head title="Clientes" />
@@ -190,7 +176,7 @@ export default function CustomersView ({ customer }) {
                   </tr>
                   </thead>
                   <tbody>
-                  {benefits.map(benefit => (
+                  {customer.benefits.map(benefit => (
                     <tr key={customer.id} className="odd:bg-white even:bg-gray-50 border-b">
                       <td className="px-3 py-2">{benefit.name}</td>
                       <td className="px-3 py-2">{benefit.country.name}</td>
@@ -202,7 +188,7 @@ export default function CustomersView ({ customer }) {
                   <tfoot>
                   <tr className="bg-gray-100">
                     <td colSpan="8" className="px-3 py-2 font-bold">
-                      Total: 10 elementos
+                      Total: {customer.benefits.length} elementos
                     </td>
                   </tr>
                   </tfoot>

@@ -9,7 +9,8 @@ class CreateRateRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'exchange_id' => 'required|exists:exchanges,id',
+            'general_rate' => 'required|numeric',
         ];
     }
 

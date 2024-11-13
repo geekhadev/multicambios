@@ -58,3 +58,8 @@ export function setRateTemp ({ rateGeneral, ammountSend, inputRate, ammountPrefe
     return rateGeneral
   }
 }
+
+export function calculateProfitPercent (rate, profit) {
+  if (!rate || !profit) return 0
+  return (profit / rate) * 100
+}

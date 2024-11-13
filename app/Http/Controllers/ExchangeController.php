@@ -68,8 +68,6 @@ class ExchangeController extends Controller
      */
     public function edit(Exchange $exchange)
     {
-        // TODO: add policy validation (form file)
-
         $exchange = Exchange::
             with(
                 'origin',
@@ -101,8 +99,7 @@ class ExchangeController extends Controller
      */
     public function update(UpdateExchangeRequest $request, Exchange $exchange)
     {
-        // TODO: add policy validation (form file)
-        // TODO: add request validation (form file)
+        $this->authorize('update', $exchange);
 
         $object = Exchange::find($exchange->id);
         $object->country_origin_id = $request->country_origin_id;
@@ -131,10 +128,9 @@ class ExchangeController extends Controller
         //
     }
 
-    public function rate(CreateRateRequest $request)
+    public function rate(CreateRateRequest $request, Rate $rate)
     {
-        // TODO: add policy validation (form file)
-        // TODO: add request validation (form file)
+        $this->authorize('create', $rate);
 
         $rate = new Rate();
         $rate->exchange_id = $request->exchange_id;
