@@ -3,6 +3,7 @@
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,6 +40,7 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
 
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');
         Route::resource('exchanges', ExchangeController::class)->names('exchanges');
+        Route::resource('transactions', TransactionController::class)->names('transactions');
     });
 });
 
