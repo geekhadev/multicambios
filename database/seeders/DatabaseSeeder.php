@@ -45,7 +45,9 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             BenefitSeeder::class,
 
-            ExchangeSeeder::class
+            ExchangeSeeder::class,
+
+            TransactionSeeder::class,
         ]);
     }
 }

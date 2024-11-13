@@ -6,6 +6,7 @@ use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
@@ -15,7 +16,17 @@ class TransactionController extends Controller
     {
         $this->authorize('viewAny', Transaction::class);
 
-        return TransactionResource::collection(Transaction::all());
+        $transactions = Transaction::with(
+            'exchange',
+            'exchange.origin',
+            'exchange.destination',
+            'confirmed_by',
+            'paid_by',
+        )->get();
+
+        return Inertia::render('Transactions/Index', [
+            'transactions' => $transactions,
+        ]);
     }
 
     public function store(TransactionRequest $request)

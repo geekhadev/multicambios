@@ -17,7 +17,7 @@ class TransactionPolicy
 
     public function view(User $user, Transaction $transaction): bool
     {
-        return true;
+        return false;
     }
 
     public function create(User $user): bool

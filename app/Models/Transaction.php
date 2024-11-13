@@ -13,7 +13,6 @@ class Transaction extends Model
 
     protected $fillable = ['*'];
 
-
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
@@ -31,11 +30,11 @@ class Transaction extends Model
 
     public function confirmed_by(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'confirmed_by_id');
+        return $this->belongsTo(User::class, 'confirmed_by', 'id');
     }
 
     public function paid_by(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'paid_by_id');
+        return $this->belongsTo(User::class, 'paid_by', 'id');
     }
 }
