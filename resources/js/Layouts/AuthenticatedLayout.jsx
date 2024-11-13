@@ -83,13 +83,13 @@ export default function Authenticated ({ header, children, module, action }) {
       </nav>
 
       <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <WidgetCalculator />
         </div>
       </header>
 
       <div className="mb-6">
-        <div className="max-w-7xl mx-auto pt-6 px-8">
+        <div className="mx-auto pt-6 px-8">
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center">
               <li className="inline-flex items-center">

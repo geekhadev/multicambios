@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AccountType;
 use App\Models\DocumentType;
+use App\Models\Rate;
 use Illuminate\Database\Seeder;
 use App\Models\Exchange;
 use App\Models\Country;
@@ -30,7 +31,7 @@ class ExchangeSeeder extends Seeder
             ->pluck('id')
             ->toArray();
 
-        Exchange::factory()->create([
+        $exchange = Exchange::factory()->create([
             'country_origin_id' => $cl->id,
             'country_destination_id' => $ve->id,
             'amount_min' => 5000,
@@ -45,6 +46,19 @@ class ExchangeSeeder extends Seeder
             'bank_origin_owner_phone' => '+56912345678',
             'bank_origin_owner_email' => 'pagos@multicambios.cl',
             'banks_destinations_ids' => json_encode($veBanksIds),
+        ]);
+
+        Rate::create([
+            'exchange_id' => $exchange->id,
+            'general_rate' => 1000,
+            'general_profit' => 100,
+            'general_profit_percent' => 10,
+            'preference_rate' => 950,
+            'preference_profit' => 50,
+            'preference_profit_percent' => 5,
+            'rate_dollar' => 10,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

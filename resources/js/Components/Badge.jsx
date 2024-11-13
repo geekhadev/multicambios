@@ -5,13 +5,15 @@ const TYPES = {
   info: 'bg-blue-300 text-blue-800'
 }
 
-const Badge = ({ children, type }) => {
-  const baseClasses = 'px-2 py-1 text-[8pt] rounded-full h-5 items-center flex'
+const Badge = ({ children, label, type }) => {
+  const baseClasses = 'flex items-center px-2 py-1 text-[8pt] rounded-full h-5 w-auto'
 
   return (
-    <span className={`${TYPES[type]} ${baseClasses}`}>
-      {children}
-    </span>
+    <div className="flex">
+      <span className={`${TYPES[type]} ${baseClasses}`}>
+        {label || children}
+      </span>
+    </div>
   )
 }
 

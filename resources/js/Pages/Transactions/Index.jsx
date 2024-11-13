@@ -36,7 +36,7 @@ export default function TransactionsIndex ({ transactions }) {
                   <th scope="col" className="px-3 py-2 whitespace-nowrap">Banco envío</th>
                   <th scope="col" className="px-3 py-2 whitespace-nowrap text-right">Monto envío</th>
                   <th scope="col" className="px-3 py-2 whitespace-nowrap">Beneficiario</th>
-                  <th scope="col" className="px-3 py-2 whitespace-nowrap">Banco apgo</th>
+                  <th scope="col" className="px-3 py-2 whitespace-nowrap">Banco pago</th>
                   <th scope="col" className="px-3 py-2 whitespace-nowrap text-right">Monto pago</th>
                   <th scope="col" className="px-3 py-2 whitespace-nowrap">Confirmado</th>
                   <th scope="col" className="px-3 py-2 whitespace-nowrap">Pagado</th>

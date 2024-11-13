@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
+import ExchangeIcons from '@/Components/Countries/ExchangeIcons.jsx'
 
 export default function ExchangesIndex ({ exchanges }) {
   return (
@@ -39,11 +40,7 @@ export default function ExchangesIndex ({ exchanges }) {
                   {exchanges.map(exchange => (
                     <tr key={exchange.id} className="odd:bg-white even:bg-gray-50 border-b">
                       <td className="px-3 py-2 whitespace-nowrap">
-                        <div className='flex items-center gap-2'>
-                          <CountryWithIcon country={exchange.origin} />
-                          {' > '}
-                          <CountryWithIcon country={exchange.destination} />
-                        </div>
+                        <ExchangeIcons exchange={exchange}/>
                       </td>
                       <td className="px-3 py-2 whitespace-nowrap">
                         <span className='text-xs'>Min: {parseInt(exchange.amount_min)}</span><br />
