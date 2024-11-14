@@ -3,6 +3,7 @@ import Button from '../../Components/Button'
 import Input from '../../Components/Form/Input'
 import { toast } from 'sonner'
 import { calculateProfitPercent } from '../../Utils/Calculator'
+import Select from '../../Components/Form/Select'
 
 export default function ExchangeConfigRates ({ exchange }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -13,7 +14,8 @@ export default function ExchangeConfigRates ({ exchange }) {
     preference_rate: exchange?.last_rate?.preference_rate ?? 0,
     preference_profit: exchange?.last_rate?.preference_profit ?? 0,
     preference_profit_percent: exchange?.last_rate?.preference_profit_percent ?? 0,
-    rate_dollar: exchange?.last_rate?.rate_dollar ?? 0
+    rate_dollar: exchange?.last_rate?.rate_dollar ?? 0,
+    operator: exchange?.operator ?? '*'
   })
 
   function handleChange (e) {
@@ -166,6 +168,23 @@ export default function ExchangeConfigRates ({ exchange }) {
                 onChange={handleChange}
                 required
                 errors={errors}
+              />
+            </div>
+            <div className="grid-cols-1">
+              <Select
+                key={1}
+                label={'Operador'}
+                id={1}
+                value={data.operator}
+                onChange={handleChange}
+                required
+                errors={errors}
+                options={[
+                  { value: '*', label: 'Multiplicar' },
+                  { value: '/', label: 'Dividir' }
+                ]}
+                placeholder={'Selecciona una opción'}
+                infoIcon={'Multiplicar: Monto enviado * Tasa = Monto recibido \nDividir: Monto enviado / Tasa = Monto recibido'}
               />
             </div>
           </div>

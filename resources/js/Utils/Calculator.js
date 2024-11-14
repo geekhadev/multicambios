@@ -2,7 +2,8 @@
 export async function recalculateToReceive ({ rate, inputs, exchange }) {
   if (rate !== undefined) {
     const rateResult = setRateTemp({ rateGeneral: rate.general_rate, ammountSend: inputs.ammountSend, inputRate: inputs.inputRate, ammountPreference: exchange.amount_preferential, ratePreference: rate.preference_rate })
-    let ammountReceive = parseFloat(inputs.ammountSend) * rateResult
+    let ammountReceive = calculateByOperator({ a: inputs.ammountSend, b: rateResult, operator: exchange.operator })
+
     ammountReceive = (isNaN(ammountReceive) || ammountReceive < 0) ? 0 : ammountReceive
     ammountReceive = parseFloat(ammountReceive).toFixed(2)
     const rateDollar = parseFloat(ammountReceive / rate.rate_dollar).toFixed(1)
@@ -14,8 +15,7 @@ export async function recalculateToReceive ({ rate, inputs, exchange }) {
 export async function recalculateToSend ({ rate, inputs, exchange }) {
   if (rate !== undefined) {
     const rateResult = setRateTemp({ rateGeneral: rate.general_rate, ammountSend: inputs.ammountSend, inputRate: inputs.inputRate, ammountPreference: exchange.amount_preferential, ratePreference: rate.preference_rate })
-
-    let ammountSend = parseFloat(inputs.ammountReceive) / rateResult
+    let ammountSend = calculateByOperator({ a: inputs.ammountReceive, b: rateResult, operator: exchange.operator, inverter: true })
     ammountSend = (isNaN(ammountSend) || ammountSend < 0) ? 0 : ammountSend
     ammountSend = parseInt(ammountSend)
     const rateDollar = parseFloat(inputs.ammountReceive / rate.rate_dollar).toFixed(1)
@@ -29,13 +29,12 @@ export async function recalculateToDollar ({ rate, inputs, exchange }) {
   if (rate !== undefined) {
     const rateResult = setRateTemp({ rateGeneral: rate.general_rate, ammountSend: inputs.ammountSend, inputRate: inputs.inputRate, ammountPreference: exchange.amount_preferential, ratePreference: rate.preference_rate })
 
-    const ammountReceive = parseFloat(rate.rate_dollar) * parseFloat(inputs.inputDollar)
+    const ammountReceive = calculateByOperator({ a: rate.rate_dollar, b: inputs.inputDollar, operator: '*' })
 
-    let ammountSend = parseFloat(ammountReceive) / rateResult
+    let ammountSend = calculateByOperator({ a: ammountReceive, b: rate.general_rate, operator: exchange.operator, inverter: true })
     ammountSend = (isNaN(ammountSend) || ammountSend < 0) ? 0 : ammountSend
     ammountSend = parseInt(ammountSend)
-    const rateDollar = parseFloat(ammountReceive / rate.rate_dollar).toFixed(1)
-    return { ammountSend, ammountReceive, rate: rateResult, rateDollar }
+    return { ammountSend, ammountReceive, rate: rateResult }
   }
 }
 
@@ -61,4 +60,21 @@ export function setRateTemp ({ rateGeneral, ammountSend, inputRate, ammountPrefe
 export function calculateProfitPercent (rate, profit) {
   if (!rate || !profit) return 0
   return (profit / rate) * 100
+}
+
+function calculateByOperator ({ a, b, operator, inverter = false }) {
+  let result = 0
+  if (inverter) operator = operator === '*' ? '/' : '*'
+
+  switch (operator) {
+    case '*':
+      result = parseFloat(a) * b
+      break
+    case '/':
+      result = parseFloat(a) / b
+      break
+    default:
+      result = 0
+  }
+  return result
 }

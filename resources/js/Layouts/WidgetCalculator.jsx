@@ -4,7 +4,7 @@ import { recalculateToReceive, recalculateToSend, recalculateToDollar } from '..
 
 export default function WidgetCalculator () {
   const { globalExchanges } = usePage().props
-  const [selectedExchange, setSelectedExchange] = useState(globalExchanges.length === 1 ? globalExchanges[0].id : null)
+  const [selectedExchange, setSelectedExchange] = useState(globalExchanges.length === 1 ? globalExchanges[0].id : '')
   const [rate, setRate] = useState(0)
   const [inputs, setInputs] = useState({
     ammountSend: 0,
@@ -25,7 +25,7 @@ export default function WidgetCalculator () {
     }
     setInputs(updatedInputs)
 
-    const exchange = globalExchanges.find((exchange) => exchange.id === selectedExchange)
+    const exchange = globalExchanges.find((exchange) => exchange.id == selectedExchange)
     const recalculateFunctions = {
       ammountSend: recalculateToReceive,
       ammountReceive: recalculateToSend,
@@ -51,7 +51,7 @@ export default function WidgetCalculator () {
   }
 
   useEffect(() => {
-    const exchange = globalExchanges.find((exchange) => exchange.id === selectedExchange)
+    const exchange = globalExchanges.find((exchange) => exchange.id == selectedExchange)
     if (exchange) {
       if (exchange.last_rate) {
         setRate(exchange.last_rate)
@@ -89,7 +89,7 @@ export default function WidgetCalculator () {
         >
           <option value="">{'Selecciona una opción'}</option>
           {globalExchanges.map((exchange) => (
-            <option key={exchange.id} value={exchange.id} disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}>
+            <option key={exchange.id} value={exchange.id} /* disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()} */>
               {exchange.origin.name} {' > '} {exchange.destination.name}
             </option>
           ))}
@@ -100,7 +100,7 @@ export default function WidgetCalculator () {
           id='ammountSend'
           onChange={handleInputChange}
           value={parseInt(inputs.ammountSend)}
-          disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
+          // disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
         />
         <input
           placeholder={'Monto a recibir'}
@@ -108,7 +108,7 @@ export default function WidgetCalculator () {
           id='ammountReceive'
           onChange={handleInputChange}
           value={inputs.ammountReceive}
-          disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
+          // disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
         />
         <input
           placeholder={'Dolares a recibir'}
