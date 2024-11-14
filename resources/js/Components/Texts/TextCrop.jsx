@@ -1,6 +1,6 @@
 const TextCrop = ({ text, maxLength }) => {
   return (
-    <span className='text-xs'>
+    <span title={text}>
       {text.length > maxLength ? text.substring(0, maxLength) + '...' : text}
     </span>
   )
