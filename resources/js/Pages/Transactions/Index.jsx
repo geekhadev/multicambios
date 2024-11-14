@@ -6,7 +6,6 @@ import Badge from '@/Components/Badge.jsx'
 import TextCurrency from '@/Components/Texts/TextCurrency.jsx'
 
 export default function TransactionsIndex ({ transactions }) {
-  console.log(transactions)
   return (
     <AuthenticatedLayout module="Transactions">
       <Head title="Transactions" />
@@ -74,7 +73,7 @@ export default function TransactionsIndex ({ transactions }) {
                       <TextCurrency currency={transaction.exchange.destination.prefix} amount={transaction.pay_amount}/>
                     </td>
                     <td className="px-3 py-2 whitespace-nowrap text-xs">
-                      {transaction.confirmed_by.name}
+                      {transaction.confirmed_by?.name}
                     </td>
                     <td className="px-3 py-2 whitespace-nowrap text-xs">
                       {transaction.paid_by?.name}
@@ -92,9 +91,10 @@ export default function TransactionsIndex ({ transactions }) {
                       </div>
                     </td>
                     <td className="px-3 py-2">
-                      <Badge type={transaction.is_active ? 'success' : 'danger'}>
-                        {transaction.is_active ? 'Activo' : 'Inactivo'}
-                      </Badge>
+                      <Badge
+                        label={transaction.is_active ? 'Activo' : 'Inactivo'}
+                        type={transaction.is_active ? 'success' : 'danger'}
+                      />
                     </td>
                     <td className="px-3 py-2">
                       <Link href={route('dashboard.transactions.edit', transaction.id)} className="text-gray-600 hover:text-blue-800">
