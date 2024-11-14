@@ -21,6 +21,14 @@ Route::get('/', function () {
     ]);
 });
 
+use App\Events\TestEvent;
+Route::get('/event', function () {
+    $date = now()->toDateTimeString();
+    $message = "Event triggered at $date";
+    broadcast(new TestEvent($message));
+    return response()->json($message);
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified', ShareExchanges::class])->name('dashboard');
