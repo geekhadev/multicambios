@@ -28,9 +28,19 @@ class Customer extends Model
         return $this->belongsTo(State::class);
     }
 
+    public function document_type(): BelongsTo
+    {
+        return $this->belongsTo(DocumentType::class);
+    }
+
     public function benefits(): HasMany
     {
         return $this->hasMany(Benefit::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 
     public function confirmed_by(): BelongsTo

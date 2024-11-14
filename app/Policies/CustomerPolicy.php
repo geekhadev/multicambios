@@ -24,4 +24,9 @@ class CustomerPolicy
     {
         return true;
     }
+
+    public function confirm(User $user): bool
+    {
+        return true;
+    }
 }

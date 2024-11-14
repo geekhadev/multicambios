@@ -20,7 +20,11 @@ class CustomerController extends Controller
         $sort = $request->input('sort', 'name');
         $direction = $request->input('direction', 'asc');
 
-        $customers = Customer::with('country', 'state')
+        $customers = Customer::with(
+            'country',
+            'state',
+            'document_type'
+        )
             ->when($request->search, function ($query, $search) {
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhereHas('country', function ($q) use ($search) {
@@ -43,7 +47,20 @@ class CustomerController extends Controller
     {
         $this->authorize('view', $customer);
 
-        $customer->load('country', 'state', 'benefits.country');
+        $customer->load(
+            'country',
+            'state',
+            'benefits',
+            'benefits.country',
+            'transactions',
+            'transactions.exchange',
+            'transactions.exchange.origin',
+            'transactions.exchange.destination',
+            'transactions.confirmed_by',
+            'transactions.paid_by',
+            'confirmed_by'
+        );
+
         return Inertia::render('Customers/View', [
             'customer' => $customer,
         ]);
@@ -59,6 +76,20 @@ class CustomerController extends Controller
         session()->flash('message', [
             'type' => 'success',
             'content' => 'Customer status updated successfully.',
+        ]);
+    }
+
+    public function confirm(Customer $customer)
+    {
+        $this->authorize('confirm', Customer::class);
+
+        $customer->confirmed_by = auth()->id();
+        $customer->confirmed_at = now();
+        $customer->save();
+
+        session()->flash('message', [
+            'type' => 'success',
+            'content' => 'Customer confirmed successfully.',
         ]);
     }
 }
