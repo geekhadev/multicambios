@@ -22,8 +22,8 @@ const DATATABLE = {
     {
       label: 'Estado',
       row: 'is_active',
-      component: (country) => <DataTableChangeStatus data={country} />,
-      className: 'w-[80px] bg-red-400 text-right'
+      component: (country) => <DataTableChangeStatus data={country} routeName="dashboard.countries.status" />,
+      className: 'w-[80px] text-right'
     }
   ]
 }
