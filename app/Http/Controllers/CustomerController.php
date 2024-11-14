@@ -28,6 +28,12 @@ class CustomerController extends Controller
                     })
                     ->orWhereHas('state', function ($q) use ($search) {
                         $q->where('name', 'like', '%'.$search.'%');
+                    })
+                    ->orWhereHas('state', function ($q) use ($search) {
+                        $q->where('email', 'like', '%'.$search.'%');
+                    })
+                    ->orWhereHas('state', function ($q) use ($search) {
+                        $q->where('phone', 'like', '%'.$search.'%');
                     });
             })
             ->orderBy($sort, $direction)
