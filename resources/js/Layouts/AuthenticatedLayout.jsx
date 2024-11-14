@@ -1,7 +1,8 @@
+import { useEffect } from 'react'
 import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import { Link, usePage } from '@inertiajs/react'
-import { Toaster } from 'sonner'
+import { Toaster, toast } from 'sonner'
 import WidgetCalculator from './WidgetCalculator'
 
 const NAV = [
@@ -15,7 +16,15 @@ const NAV = [
 ]
 
 export default function Authenticated ({ header, children, module, action }) {
-  const user = usePage().props.auth.user
+  const { flash, auth } = usePage().props
+  const { user } = auth
+
+  useEffect(() => {
+    if (!flash.message) return
+    (flash.message.type === 'success')
+      ? toast.success(flash.message.content, { duration: 2000 })
+      : toast.error(flash.message.content, { duration: 2000 })
+  }, [flash])
 
   return (
     <div className="min-h-screen bg-gray-100">
