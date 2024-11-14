@@ -37,7 +37,9 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
         Route::get('banks-status/{bank}', [BankController::class, 'status'])->name('banks.status');
         Route::resource('banks', BankController::class)->names('banks');
 
+        Route::get('customers-status/{customer}', [CustomerController::class, 'status'])->name('customers.status');
         Route::resource('customers', CustomerController::class)->names('customers');
+
         Route::resource('benefits', BenefitController::class)->names('benefits');
 
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');

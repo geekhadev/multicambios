@@ -32,4 +32,9 @@ class Customer extends Model
     {
         return $this->hasMany(Benefit::class);
     }
+
+    public function confirmed_by(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'confirmed_by', 'id');
+    }
 }
