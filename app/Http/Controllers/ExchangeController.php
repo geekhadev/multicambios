@@ -29,8 +29,8 @@ class ExchangeController extends Controller
                 'origin',
                 'destination',
                 'bank_origin',
-                'document_type_owner',
-                'bank_origin_account_type'
+                'bank_origin_account_type',
+                'document_type_owner'
             )
             ->get();
 
@@ -40,34 +40,12 @@ class ExchangeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreExchangeRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Exchange $exchange)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Exchange $exchange)
     {
+        $this->authorize('update', $exchange);
+
         $exchange = Exchange::
             with(
                 'origin',
@@ -84,7 +62,6 @@ class ExchangeController extends Controller
 
         $types_account = AccountType::get();
         $document_type = DocumentType::get();
-        //dd($types_account->toArray());
 
         return Inertia::render('Exchanges/Config', [
             'exchange' => $exchange,
@@ -120,18 +97,8 @@ class ExchangeController extends Controller
         $object->save();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Exchange $exchange)
-    {
-        //
-    }
-
     public function rate(CreateRateRequest $request, Rate $rate)
     {
-        $this->authorize('create', $rate);
-
         $rate = new Rate();
         $rate->exchange_id = $request->exchange_id;
         $rate->general_rate = $request->general_rate;
