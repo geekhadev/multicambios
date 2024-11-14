@@ -49,6 +49,7 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
         Route::get('customers-confirm/{customer}', [CustomerController::class, 'confirm'])->name('customers.confirm');
         Route::resource('customers', CustomerController::class)->names('customers');
 
+        Route::get('benefits-status/{benefit}', [BenefitController::class, 'status'])->name('benefits.status');
         Route::resource('benefits', BenefitController::class)->names('benefits');
 
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');

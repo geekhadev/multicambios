@@ -1,77 +1,81 @@
 import { Head, Link } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import CountryWithIcon from '@/Components/Countries/CountryWithIcon.jsx'
+import DataTable from '@/Components/Datatable/DataTable'
+import DataTableChangeStatus from '@/Components/Datatable/DataTableChangeStatus'
+import CountryWithIcon from '@/Components/Countries/CountryWithIcon'
+import CustomerConfirm from '@/Components/Customers/CustomerConfirm.jsx'
+import TextCrop from '@/Components/Texts/TextCrop.jsx'
 
-export default function CountriesIndex ({ benefits }) {
+const DATATABLE = {
+  title: 'Beneficiarios',
+  description: 'Listado de beneficiarios asociados a los clientes.',
+  order: 'name',
+  fields: [
+    {
+      label: 'País',
+      row: 'country.name',
+      component: (benefit) => <CountryWithIcon country={benefit.country} />
+    },
+    {
+      label: 'Nombre',
+      row: 'name',
+      sortable: true
+    },
+    {
+      label: 'Documento',
+      row: 'document_type.name',
+      component: (benefit) => <>
+        <TextCrop text={benefit.document_type.name} maxLength={3}/>
+        : {benefit.document_number}
+      </>
+    },
+    {
+      label: 'Correo',
+      row: 'email'
+    },
+    {
+      label: 'Teléfono',
+      row: 'phone'
+    },
+    {
+      label: 'Banco',
+      row: 'bank.name',
+      component: (benefit) => <TextCrop text={benefit.bank.name} maxLength={20}/>
+    },
+    {
+      label: 'Cuenta',
+      row: 'bank_account_type.name',
+      component: (benefit) => <>{benefit.bank_account_type.name}: {benefit.bank_account_number}</>
+    },
+    {
+      label: '',
+      row: 'is_active',
+      component: (benefit) => {
+        return (
+          <div className="flex flex-row gap-1">
+            <DataTableChangeStatus data={benefit} routeName="dashboard.benefits.status" />
+            <Link href={route('dashboard.benefits.show', benefit.id)} className="text-gray-600 hover:text-blue-800">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-settings">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path
+                  d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
+                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/>
+              </svg>
+            </Link>
+          </div>
+        )
+      },
+      className: 'w-[80px] text-right'
+    }
+  ]
+}
+
+export default function BenefitsIndex ({ paginate }) {
   return (
     <AuthenticatedLayout module="Beneficiarios">
       <Head title="Beneficiarios" />
 
-      <div>
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3">
-            <div className="flex justify-between items-center mb-2">
-              <div className='flex flex-col'>
-                <h4 className="text-lg font-bold">
-                  Beneficiarios
-                </h4>
-                <p className="text-sm text-gray-500 max-w-96">
-                  Listado de beneficiarios asociados a los clientes.
-                </p>
-              </div>
-              <div className='flex gap-4'>
-              </div>
-            </div>
-            <div className="relative overflow-x-auto">
-              <table className="w-full text-sm text-left rtl:text-right">
-                <thead>
-                  <tr className='bg-gray-200 border-t border-b border-gray-300'>
-                    <th scope="col" className="px-3 py-2">Nombre</th>
-                    <th scope="col" className="px-3 py-2">País cliente</th>
-                    <th scope="col" className="px-3 py-2">Cliente</th>
-                    <th scope="col" className="px-3 py-2 w-24">Estado</th>
-                    <th scope="col" className="px-3 py-2 w-0"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {benefits.map(benefit => (
-                    <tr key={benefit.id} className="odd:bg-white even:bg-gray-50 border-b">
-                      <td className="px-3 py-2">{benefit.name}</td>
-                      <td className="px-3 py-2">
-                        <CountryWithIcon country={benefit.customer.country}/>
-                      </td>
-                      <td className="px-3 py-2">{benefit.customer.name}</td>
-                      <td className="px-3 py-2">
-                        {
-                          benefit.is_active
-                            ? <span className="bg-green-300 text-green-800 px-2 py-1 text-[8pt] rounded-full">Activo</span>
-                            : <span className="bg-red-300 text-red-800 px-2 py-1 text-[8pt] rounded-full">Inactivo</span>
-                        }
-                      </td>
-                      <td className="px-3 py-2 flex">
-                        <Link href={route('dashboard.benefits.show', benefit.id)} className="text-gray-600 hover:text-blue-800">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-eye">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
-                            <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
-                          </svg>
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                <tr className="bg-gray-100">
-                  <td colSpan="8" className="px-3 py-2 font-bold">
-                    Total: {benefits.length} elementos
-                  </td>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DataTable config={DATATABLE} paginate={paginate} />
     </AuthenticatedLayout>
   )
 }

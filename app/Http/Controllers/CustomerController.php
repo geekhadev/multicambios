@@ -27,17 +27,14 @@ class CustomerController extends Controller
         )
             ->when($request->search, function ($query, $search) {
                 $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('document_number', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%')
+                    ->orWhere('phone', 'like', '%'.$search.'%')
+                    ->orWhereHas('document_type', function ($q) use ($search) {
+                        $q->where('name', 'like', '%'.$search.'%');
+                    })
                     ->orWhereHas('country', function ($q) use ($search) {
                         $q->where('name', 'like', '%'.$search.'%');
-                    })
-                    ->orWhereHas('state', function ($q) use ($search) {
-                        $q->where('name', 'like', '%'.$search.'%');
-                    })
-                    ->orWhereHas('state', function ($q) use ($search) {
-                        $q->where('email', 'like', '%'.$search.'%');
-                    })
-                    ->orWhereHas('state', function ($q) use ($search) {
-                        $q->where('phone', 'like', '%'.$search.'%');
                     });
             })
             ->orderBy($sort, $direction)

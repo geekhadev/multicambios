@@ -25,4 +25,19 @@ class Benefit extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function document_type(): BelongsTo
+    {
+        return $this->belongsTo(DocumentType::class);
+    }
+
+    public function bank(): BelongsTo
+    {
+        return $this->belongsTo(Bank::class);
+    }
+
+    public function bank_account_type(): BelongsTo
+    {
+        return $this->belongsTo(AccountType::class);
+    }
 }

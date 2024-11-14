@@ -44,4 +44,9 @@ class BenefitPolicy
     {
         return false;
     }
+
+    public function status(User $user): bool
+    {
+        return true;
+    }
 }
