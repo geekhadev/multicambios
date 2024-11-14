@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import Badge from '@/Components/Badge.jsx'
 import DataTable from '@/Components/Datatable/DataTable.jsx'
+import DataTableChangeStatus from '@/Components/Datatable/DataTableChangeStatus.jsx'
 
 const DATATABLE = {
   title: 'Países',
@@ -22,8 +22,8 @@ const DATATABLE = {
     {
       label: 'Estado',
       row: 'is_active',
-      component: ({ is_active }) => <Badge label={is_active ? 'Activo' : 'Inactivo'} type={is_active ? 'success' : 'danger'} />,
-      className: 'w-0'
+      component: (country) => <DataTableChangeStatus data={country} />,
+      className: 'w-[80px] bg-red-400 text-right'
     }
   ]
 }

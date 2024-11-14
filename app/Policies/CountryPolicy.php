@@ -10,4 +10,9 @@ class CountryPolicy
     {
         return true;
     }
+
+    public function status(User $user): bool
+    {
+        return true;
+    }
 }

@@ -30,9 +30,10 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // prefix dashboard
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('countries-status/{country}', [CountryController::class, 'status'])->name('countries.status');
         Route::resource('countries', CountryController::class)->names('countries');
+
         Route::resource('banks', BankController::class)->names('banks');
 
         Route::resource('customers', CustomerController::class)->names('customers');

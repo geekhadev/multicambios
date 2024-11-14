@@ -35,4 +35,17 @@ class CountryController extends Controller
             'paginate' => $countries,
         ]);
     }
+
+    public function status(Country $country)
+    {
+        $this->authorize('status', Country::class);
+
+        $country->is_active = !$country->is_active;
+        $country->save();
+
+        session()->flash('message', [
+            'type' => 'success',
+            'content' => 'Country status updated successfully.',
+        ]);
+    }
 }

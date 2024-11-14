@@ -1,8 +1,8 @@
-const TableTd = ({ row, component }) => {
+const TableTd = ({ row, field, component }) => {
   const baseClasses = 'px-3 py-2 whitespace-nowrap'
   return (
     <td scope="col" className={`${baseClasses}`}>
-      {component ? component(row) : row}
+      {component ? component(row) : field}
     </td>
   )
 }
@@ -15,7 +15,8 @@ export default function TableBody ({ data, fields }) {
         {fields.map((field, fieldIndex) => (
           <TableTd
             key={fieldIndex}
-            row={rowData[field.row]}
+            row={rowData}
+            field={rowData[field.row]}
             component={field.component}
           />
         ))}
