@@ -26,7 +26,6 @@ export async function recalculateToSend ({ rate, inputs, exchange }) {
 
 // Recalculate rates
 export async function recalculateToDollar ({ rate, inputs, exchange }) {
-  console.log({ rate, inputs, exchange })
   if (rate !== undefined) {
     const rateResult = setRateTemp({ rateGeneral: rate.general_rate, ammountSend: inputs.ammountSend, inputRate: inputs.inputRate, ammountPreference: exchange.amount_preferential, ratePreference: rate.preference_rate })
 
