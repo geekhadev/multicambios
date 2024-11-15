@@ -105,8 +105,10 @@ export default function Authenticated ({ header, children, module, action }) {
       </nav>
 
       <header className="bg-white shadow">
-        <div className="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <WidgetCalculator />
+        <div className="flex justify-start">
+          <div className="basis-1/2 py-2 px-4 sm:px-6 lg:px-8">
+            <WidgetCalculator />
+          </div>
         </div>
       </header>
 

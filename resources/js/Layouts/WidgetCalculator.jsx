@@ -1,6 +1,7 @@
 import { usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import { recalculateToReceive, recalculateToSend, recalculateToDollar } from '../Utils/Calculator'
+import { toast } from 'sonner'
 
 export default function WidgetCalculator () {
   const { globalExchanges } = usePage().props
@@ -21,7 +22,7 @@ export default function WidgetCalculator () {
     const { id, value } = e.target
     const updatedInputs = {
       ...inputs,
-      [id]: value
+      [id]: value || 0
     }
     setInputs(updatedInputs)
 
@@ -48,6 +49,19 @@ export default function WidgetCalculator () {
           console.error(error)
         })
     }
+  }
+
+  const handleCopyMessage = (e) => {
+    e.preventDefault()
+    const sendAmount = document.querySelector('.send_amount')
+    const receiveAmount = document.querySelector('.receive_amount')
+    const dolarAmount = document.querySelector('.dolar_amount')
+    const rate = document.querySelector('.rate')
+
+    const message = `Monto a enviar: ${sendAmount.value} - Monto a recibir: ${receiveAmount.value} - Dólares a recibir: ${dolarAmount.value} - Rate: ${rate.value}`
+    navigator.clipboard.writeText(message)
+
+    toast.info('Mensaje copiado al portapapeles', { duration: 2000 })
   }
 
   useEffect(() => {
@@ -78,14 +92,21 @@ export default function WidgetCalculator () {
     }
   }, [selectedExchange])
 
+  useEffect(() => {
+    if (globalExchanges.length === 1) {
+      document.querySelector('.navbar-left select.select-exchange').style.display = 'none'
+    }
+  }, [])
+
   return (
-    <form className="col-md-10 navbar-left" id="formRates">
-      <div style={{ display: 'flex', marginTop: '7px' }}>
+    <form className="col-md-12 navbar-left" id="formRates">
+      <h3 className='flex-1 text-gray-500 text-sm'>{'Calculadora de cambios'}</h3>
+      <div className='flex mt-1 gap-1'>
         <select
           value={selectedExchange}
           onChange={handleSelectChange}
           required
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="select-exchange flex-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
           <option value="">{'Selecciona una opción'}</option>
           {globalExchanges.map((exchange) => (
@@ -96,7 +117,7 @@ export default function WidgetCalculator () {
         </select>
         <input
           placeholder={'Monto a enviar'}
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 send_amount'
+          className='flex-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 send_amount'
           id='ammountSend'
           onChange={handleInputChange}
           value={parseInt(inputs.ammountSend)}
@@ -104,7 +125,7 @@ export default function WidgetCalculator () {
         />
         <input
           placeholder={'Monto a recibir'}
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 receive_amount'
+          className='flex-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 receive_amount'
           id='ammountReceive'
           onChange={handleInputChange}
           value={inputs.ammountReceive}
@@ -112,7 +133,7 @@ export default function WidgetCalculator () {
         />
         <input
           placeholder={'Dolares a recibir'}
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dolar_amount'
+          className='flex-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dolar_amount'
           id='inputDollar'
           onChange={handleInputChange}
           value={inputs.inputDollar}
@@ -125,6 +146,13 @@ export default function WidgetCalculator () {
           onChange={handleInputChange}
           readOnly
         />
+        <button
+          onClick={handleCopyMessage}
+          className='flex-1 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded-lg' id='btnRates'
+          title='Copiar mensaje'
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" height="12" width="10.5" viewBox="0 0 448 512"> <path d="M208 0L332.1 0c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9L448 336c0 26.5-21.5 48-48 48l-192 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48zM48 128l80 0 0 64-64 0 0 256 192 0 0-32 64 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 176c0-26.5 21.5-48 48-48z"/></svg>
+        </button>
       </div>
     </form>
   )
