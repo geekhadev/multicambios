@@ -4,6 +4,7 @@ import DataTable from '@/Components/Datatable/DataTable'
 import DataTableChangeStatus from '@/Components/Datatable/DataTableChangeStatus'
 import CountryWithIcon from '@/Components/Countries/CountryWithIcon'
 import CustomerConfirm from '@/Components/Customers/CustomerConfirm.jsx'
+import TextCrop from '@/Components/Texts/TextCrop.jsx'
 
 const DATATABLE = {
   title: 'Clientes',
@@ -16,12 +17,12 @@ const DATATABLE = {
       sortable: true
     },
     {
-      label: 'Documento tipo',
-      row: 'document_type.name'
-    },
-    {
       label: 'Documento',
-      row: 'document_number'
+      row: 'document_type.name',
+      component: (benefit) => <>
+        <TextCrop text={benefit.document_type.name} maxLength={3}/>
+        : {benefit.document_number}
+      </>
     },
     {
       label: 'Correo',
@@ -38,7 +39,10 @@ const DATATABLE = {
     },
     {
       label: 'Estado',
-      row: 'state.name'
+      row: 'state.name',
+      component: (benefit) => <>
+        <TextCrop text={benefit.state.name} maxLength={15}/>
+      </>
     },
     {
       label: '',
