@@ -10,7 +10,7 @@ const TableTh = ({ field, order, handleSort, currentSort, currentDirection }) =>
       <button
         type="button"
         className="flex items-center"
-        onClick={() => handleSort(row)}
+        onClick={() => sortable ? handleSort(row) : null}
       >
         {label}
         {sortable && (
