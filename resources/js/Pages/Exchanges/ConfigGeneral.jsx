@@ -4,6 +4,7 @@ import Input from '../../Components/Form/Input'
 import Select from '../../Components/Form/Select'
 import { Accordion } from 'flowbite-react'
 import { toast } from 'sonner'
+import { roundDecimals } from '../../Utils/Calculator'
 
 export default function ExchangeConfigGeneral ({ exchange, banks, types_account, document_type }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
@@ -145,7 +146,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks, types_account,
                           label={label}
                           type={type}
                           id={key}
-                          value={data[key]}
+                          value={roundDecimals(data[key])}
                           onChange={handleChange}
                           required
                           errors={errors}

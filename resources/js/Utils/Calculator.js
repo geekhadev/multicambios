@@ -78,3 +78,10 @@ function calculateByOperator ({ a, b, operator, inverter = false }) {
   }
   return result
 }
+
+export function roundDecimals (num, decimals = false) {
+  if (decimals) {
+    return parseFloat(num).toFixed(decimals)
+  }
+  return Math.round(num)
+}
