@@ -26,18 +26,18 @@ export default function Authenticated ({ header, children, module, action }) {
       : toast.error(flash.message.content, { duration: 2000 })
   }, [flash])
 
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    Echo.private('test-channel')
-      .listen('TestEvent', (response) => {
-        toast.info(response.message, { duration: 2000 })
-      })
-
-    return () => {
-      // eslint-disable-next-line no-undef
-      Echo.leave('test-channel')
-    }
-  }, [])
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-undef
+  //   Echo.private('test-channel')
+  //     .listen('TestEvent', (response) => {
+  //       toast.info(response.message, { duration: 2000 })
+  //     })
+  //
+  //   return () => {
+  //     // eslint-disable-next-line no-undef
+  //     Echo.leave('test-channel')
+  //   }
+  // }, [])
 
   return (
     <div className="min-h-screen bg-gray-100">
