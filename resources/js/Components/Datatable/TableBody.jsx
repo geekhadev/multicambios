@@ -5,7 +5,7 @@ const getNestedValue = (obj, field, fieldKey) => {
     const keys = fieldKey.split('.')
     let value = obj
     keys.forEach(key => {
-      value = value[key]
+      value = value[key] ?? ''
     })
     return value
   }
