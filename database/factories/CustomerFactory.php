@@ -20,7 +20,10 @@ class CustomerFactory extends Factory
         $state = State::where('country_id', $cl->id)->inRandomOrder()->first();
 
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::factory([
+                'phone' => $this->faker->phoneNumber(),
+                'password' => bcrypt('qwerty123'),
+            ]),
             'document_type_id' => DocumentType::inRandomOrder()->first(),
             'country_id' => $cl->id,
             'state_id' => $state->id,
