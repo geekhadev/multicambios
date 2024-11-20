@@ -25,6 +25,7 @@ return new class extends Migration
             $table->decimal('preference_profit', $amount_integer, $amount_decimal);
             $table->decimal('preference_profit_percent', $amount_integer, $percentage_decimal);
             $table->decimal('rate_dollar', $amount_integer, $percentage_decimal);
+            $table->string('operator')->default('*');
             $table->timestamps();
         });
     }

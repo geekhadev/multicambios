@@ -1,4 +1,53 @@
+import { usePage } from '@inertiajs/react'
+import { useState } from 'react'
+import { recalculateToReceive, separatorThousands } from '../../Utils/Calculator'
+
 const Calculator = () => {
+  const { globalExchanges } = usePage().props
+  const [inputs, setInputs] = useState({
+    ammountSend: globalExchanges[0].amount_min,
+    ammountReceive: 0,
+    inputRate: globalExchanges[0].last_rate.general_rate,
+    inputDollar: 0,
+    origin: globalExchanges[0].origin.id,
+    destination: globalExchanges[0].destination.id
+  })
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target
+    const updatedInputs = {
+      ...inputs,
+      [id]: value || 0
+    }
+    setInputs(updatedInputs)
+  }
+
+  const handleCalculate = (e) => {
+    e.preventDefault()
+    // determina el exchange seleccionado según el destino y origen
+    const exchange = globalExchanges.find((exchange) => exchange.origin.id == inputs.origin && exchange.destination.id == inputs.destination)
+    const initialInputs = {
+      ...inputs,
+      ammountReceive: exchange.amount_min,
+      inputRate: exchange.last_rate.general_rate,
+      inputDollar: exchange.last_rate.rate_dollar
+    }
+    setInputs(initialInputs)
+    recalculateToReceive({ rate: exchange.last_rate, inputs: initialInputs, exchange })
+      .then((result) => {
+        setInputs({
+          ...inputs,
+          ammountSend: result.ammountSend || inputs.ammountSend,
+          ammountReceive: result.ammountReceive || inputs.ammountReceive,
+          inputRate: result.rate || inputs.inputRate,
+          inputDollar: result.rateDollar || inputs.inputDollar
+        })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
   return (
     <section id="calculadora">
       <div className="grid max-w-6xl px-16 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 bg-teal-700 rounded-xl">
@@ -25,27 +74,57 @@ const Calculator = () => {
               <h3 className="text-2xl font-bold text-teal-700">Calcula tu envío</h3>
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-bold text-gray-700" htmlFor="amount">Cantidad a enviar</label>
-                <input className="p-2 border border-gray-300 rounded-lg" type="text" id="amount" />
+                <input
+                  className="p-2 border border-gray-300 rounded-lg"
+                  type="text"
+                  id='ammountSend'
+                  onChange={handleInputChange}
+                />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-gray-700" htmlFor="currency">Moneda</label>
-                <select className="p-2 border border-gray-300 rounded-lg" id="currency">
-                  <option value="usd">USD</option>
-                  <option value="eur">EUR</option>
-                  <option value="cop">COP</option>
-                  <option value="pen">PEN</option>
+                <label className="text-sm font-bold text-gray-700" htmlFor="origin">Moneda</label>
+                <select
+                  className="p-2 border border-gray-300 rounded-lg"
+                  id="origin"
+                  onChange={handleInputChange}
+                >
+                  {
+                    globalExchanges.map((exchange) => (
+                      <option key={exchange.origin.id} value={exchange.origin.id}>{exchange.origin.prefix}</option>
+                    ))
+                  }
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-gray-700" htmlFor="country">País de destino</label>
-                <select className="p-2 border border-gray-300 rounded-lg" id="country">
-                  <option value="us">Estados Unidos</option>
-                  <option value="ve">Venezuela</option>
-                  <option value="co">Colombia</option>
-                  <option value="pe">Perú</option>
+                <label className="text-sm font-bold text-gray-700" htmlFor="destination">País de destino</label>
+                <select
+                  className="p-2 border border-gray-300 rounded-lg"
+                  id="destination"
+                  onChange={handleInputChange}
+                >
+                  {
+                    globalExchanges.map((exchange) => (
+                      <option key={exchange.id} value={exchange.destination.id}>{exchange.destination.name}</option>
+                    ))
+                  }
                 </select>
               </div>
-              <button className="bg-teal-700 text-white rounded-lg py-2 font-bold">Calcular</button>
+              {/* div receive results */}
+              <div className="flex flex-col">
+                <label className="text-sm font-bold text-gray-700" htmlFor="amount">
+                  Tasa de cambio: { inputs.inputRate }
+                </label>
+                <label className="text-sm font-bold text-gray-700" htmlFor="amount">
+                  Recibe: {separatorThousands(inputs.ammountReceive) }
+                </label>
+                <label className="text-sm font-bold text-gray-700" htmlFor="amount">
+                  Dolares: {inputs.inputDollar}
+                </label>
+              </div>
+              <button
+                className="bg-teal-700 text-white rounded-lg py-2 font-bold"
+                onClick={handleCalculate}
+              >Calcular</button>
             </form>
           </div>
         </div>

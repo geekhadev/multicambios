@@ -22,11 +22,13 @@ export default function ExchangeConfigRates ({ exchange }) {
     const key = e.target.id
     let value = e.target.value
 
-    value = value ? parseFloat(value) : ''
+    if (key !== 'operator') {
+      value = value ? parseFloat(value) : ''
+    }
 
     const updatedData = {
       ...data,
-      [key]: isNaN(value) ? '' : value // Manejar NaN
+      [key]: value // Manejar NaN
     }
 
     if (key === 'general_rate' || key === 'general_profit') {
@@ -172,9 +174,9 @@ export default function ExchangeConfigRates ({ exchange }) {
             </div>
             <div className="grid-cols-1">
               <Select
-                key={1}
+                key={'operator'}
                 label={'Operador'}
-                id={1}
+                id={'operator'}
                 value={data.operator}
                 onChange={handleChange}
                 required

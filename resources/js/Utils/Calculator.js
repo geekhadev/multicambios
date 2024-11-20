@@ -59,7 +59,7 @@ export function setRateTemp ({ rateGeneral, ammountSend, inputRate, ammountPrefe
 
 export function calculateProfitPercent (rate, profit) {
   if (!rate || !profit) return 0
-  return (profit / rate) * 100
+  return ((profit / rate) * 100).toFixed(5)
 }
 
 function calculateByOperator ({ a, b, operator, inverter = false }) {
@@ -84,4 +84,16 @@ export function roundDecimals (num, decimals = false) {
     return parseFloat(num).toFixed(decimals)
   }
   return Math.round(num)
+}
+
+export function separatorThousands (num) {
+  // separador de miles con punto y decimales con coma
+  if (isNaN(num)) {
+    return num
+  }
+  const broken_number = num.toString().split('.')
+  if (broken_number.length > 1) {
+    return parseInt(broken_number[0]).toLocaleString('de-DE') + ',' + broken_number[1]
+  }
+  return parseInt(broken_number[0]).toLocaleString('de-DE')
 }

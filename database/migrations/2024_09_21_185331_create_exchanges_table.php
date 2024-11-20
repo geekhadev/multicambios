@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('bank_origin_owner_name');
             $table->string('bank_origin_owner_phone');
             $table->string('bank_origin_owner_email');
-            $table->string('operator')->default('*');
             $table->json('banks_destinations_ids');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

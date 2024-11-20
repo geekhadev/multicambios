@@ -19,7 +19,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->middleware(ShareExchanges::class);
 
 use App\Events\TestEvent;
 Route::get('/event', function () {
