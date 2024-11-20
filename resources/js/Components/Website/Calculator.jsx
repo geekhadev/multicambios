@@ -112,7 +112,7 @@ const Calculator = () => {
               {/* div receive results */}
               <div className="flex flex-col">
                 <label className="text-sm font-bold text-gray-700" htmlFor="amount">
-                  Tasa de cambio: { inputs.inputRate }
+                  Tasa de cambio: { separatorThousands(inputs.inputRate) }
                 </label>
                 <label className="text-sm font-bold text-gray-700" htmlFor="amount">
                   Recibe: {separatorThousands(inputs.ammountReceive) }
