@@ -51,7 +51,7 @@ export function setRateTemp ({ rateGeneral, ammountSend, inputRate, ammountPrefe
   } else if (ammountSend < ammountPreference && inputRate !== rateGeneral && inputRate !== ratePreference) {
     return inputRate
   } else if (ammountSend >= ammountPreference && inputRate !== rateGeneral) {
-    return inputRate
+    return ratePreference
   } else {
     return rateGeneral
   }
