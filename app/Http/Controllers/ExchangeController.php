@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRateRequest;
-use App\Http\Requests\Exchange\StoreExchangeRequest;
+// use App\Http\Requests\Exchange\StoreExchangeRequest;
 use App\Http\Requests\Exchange\UpdateExchangeRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\DocumentType;
 use App\Models\AccountType;
@@ -20,9 +21,14 @@ class ExchangeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', Exchange::class);
+
+        $per_page = config('paginate.per_page');
+
+        $sort = $request->input('sort', 'country_origin_id');
+        $direction = $request->input('direction', 'asc');
 
         $exchanges = Exchange::
             with(
@@ -32,10 +38,12 @@ class ExchangeController extends Controller
                 'bank_origin_account_type',
                 'document_type_owner'
             )
-            ->get();
+            ->orderBy($sort, $direction)
+            ->paginate($per_page)
+            ->withQueryString();
 
         return Inertia::render('Exchanges/Index', [
-            'exchanges' => $exchanges,
+            'paginate' => $exchanges,
         ]);
     }
 
@@ -112,4 +120,16 @@ class ExchangeController extends Controller
         $rate->save();
     }
 
+    public function status(Exchange $exchange)
+    {
+        $this->authorize('status', Exchange::class);
+
+        $exchange->is_active = !$exchange->is_active;
+        $exchange->save();
+
+        session()->flash('message', [
+            'type' => 'success',
+            'content' => 'Exchange status updated successfully.',
+        ]);
+    }
 }

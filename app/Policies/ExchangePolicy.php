@@ -31,4 +31,12 @@ class ExchangePolicy
     {
         return true;
     }
+
+    /**
+     * Determine whether the user can change the status of the model.
+     */
+    public function status(User $user): bool
+    {
+        return true;
+    }
 }
