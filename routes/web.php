@@ -39,19 +39,20 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::get('countries-status/{country}', [CountryController::class, 'status'])->name('countries.status');
+        Route::get('countries/{country}/status', [CountryController::class, 'status'])->name('countries.status');
         Route::resource('countries', CountryController::class)->names('countries');
 
-        Route::get('banks-status/{bank}', [BankController::class, 'status'])->name('banks.status');
+        Route::get('banks/{bank}/status', [BankController::class, 'status'])->name('banks.status');
         Route::resource('banks', BankController::class)->names('banks');
 
-        Route::get('customers-status/{customer}', [CustomerController::class, 'status'])->name('customers.status');
+        Route::get('customers/{customer}/status', [CustomerController::class, 'status'])->name('customers.status');
         Route::get('customers-confirm/{customer}', [CustomerController::class, 'confirm'])->name('customers.confirm');
         Route::resource('customers', CustomerController::class)->names('customers');
 
-        Route::get('benefits-status/{benefit}', [BenefitController::class, 'status'])->name('benefits.status');
+        Route::get('benefits/{benefit}/status', [BenefitController::class, 'status'])->name('benefits.status');
         Route::resource('benefits', BenefitController::class)->names('benefits');
 
+        Route::get('exchanges/{exchange}/status', [ExchangeController::class, 'status'])->name('exchanges.status');
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');
         Route::resource('exchanges', ExchangeController::class)->names('exchanges');
         Route::resource('transactions', TransactionController::class)->names('transactions');
