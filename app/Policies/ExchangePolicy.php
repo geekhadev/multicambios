@@ -39,4 +39,9 @@ class ExchangePolicy
     {
         return true;
     }
+
+    public function open(User $user): bool
+    {
+        return true;
+    }
 }

@@ -52,6 +52,7 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
         Route::get('benefits/{benefit}/status', [BenefitController::class, 'status'])->name('benefits.status');
         Route::resource('benefits', BenefitController::class)->names('benefits');
 
+        Route::get('exchanges/{exchange}/open', [ExchangeController::class, 'open'])->name('exchanges.open');
         Route::get('exchanges/{exchange}/status', [ExchangeController::class, 'status'])->name('exchanges.status');
         Route::post('exchanges/{exchange}/rate', [ExchangeController::class, 'rate'])->name('exchanges.rate');
         Route::resource('exchanges', ExchangeController::class)->names('exchanges');

@@ -6,6 +6,7 @@ import CountryWithIcon from '@/Components/Countries/CountryWithIcon'
 import CustomerConfirm from '@/Components/Customers/CustomerConfirm.jsx'
 import TextCrop from '@/Components/Texts/TextCrop.jsx'
 import ExchangeIcons from '@/Components/Countries/ExchangeIcons'
+import ExchangeOpen from '@/Components/Exchanges/ExchangeOpen.jsx'
 
 const DATATABLE = {
   title: 'Exchanges',
@@ -64,6 +65,7 @@ const DATATABLE = {
         return (
           <div className="flex flex-row gap-1">
             <DataTableChangeStatus data={exchange} routeName="dashboard.exchanges.status" />
+            <ExchangeOpen exchange={exchange} />
             <Link href={route('dashboard.exchanges.edit', exchange.id)} className="text-gray-600 hover:text-blue-800">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-settings">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

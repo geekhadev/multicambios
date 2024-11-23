@@ -132,4 +132,17 @@ class ExchangeController extends Controller
             'content' => 'Exchange status updated successfully.',
         ]);
     }
+
+    public function open(Exchange $exchange)
+    {
+        $this->authorize('open', Exchange::class);
+
+        $exchange->is_open = !$exchange->is_open;
+        $exchange->save();
+
+        session()->flash('message', [
+            'type' => 'success',
+            'content' => 'Exchange status open updated successfully.',
+        ]);
+    }
 }

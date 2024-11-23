@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('bank_origin_owner_email');
             $table->json('banks_destinations_ids');
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_open')->default(true);
             $table->timestamps();
         });
     }
