@@ -1,9 +1,9 @@
 import { useForm } from '@inertiajs/react'
-import Button from '../../Components/Button'
-import Input from '../../Components/Form/Input'
+import Button from '../Button.jsx'
+import Input from '../Form/Input.jsx'
 import { toast } from 'sonner'
-import { calculateProfitPercent } from '../../Utils/Calculator'
-import Select from '../../Components/Form/Select'
+import { calculateProfitPercent } from '../../Utils/Calculator.js'
+import Select from '../Form/Select.jsx'
 
 export default function ExchangeConfigRates ({ exchange }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -55,7 +55,7 @@ export default function ExchangeConfigRates ({ exchange }) {
   }
 
   return (
-    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 col-span-2">
+    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3">
       {
         (exchange.last_rate && new Date(exchange.last_rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()) && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

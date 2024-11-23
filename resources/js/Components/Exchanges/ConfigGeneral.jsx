@@ -1,10 +1,10 @@
 import { useForm } from '@inertiajs/react'
-import Button from '../../Components/Button'
-import Input from '../../Components/Form/Input'
-import Select from '../../Components/Form/Select'
+import Button from '../Button.jsx'
+import Input from '../Form/Input.jsx'
+import Select from '../Form/Select.jsx'
 import { Accordion } from 'flowbite-react'
 import { toast } from 'sonner'
-import { roundDecimals } from '../../Utils/Calculator'
+import { roundDecimals } from '../../Utils/Calculator.js'
 
 export default function ExchangeConfigGeneral ({ exchange, banks, types_account, document_type }) {
   const { data, setData, patch, processing, errors } = useForm(exchange)
@@ -102,7 +102,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks, types_account,
   ]
 
   return (
-    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 col-span-1">
+    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3">
       <div className="flex justify-between items-center">
         <div className='flex flex-col'>
           <h4 className="text-lg font-bold">

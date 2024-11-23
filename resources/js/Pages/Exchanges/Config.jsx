@@ -1,7 +1,8 @@
 import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import ExchangeConfigGeneral from './ConfigGeneral'
-import ExchangeConfigRates from './ConfigRates'
+import ExchangeConfigGeneral from '@/Components/Exchanges/ConfigGeneral.jsx'
+import ExchangeConfigRates from '@/Components/Exchanges/ConfigRates.jsx'
+import ExchangeRatesList from '@/Components/Exchanges/ExchangeRatesList.jsx'
 
 export default function ExchangeConfig ({ exchange, banks, rate, types_account, document_type }) {
   return (
@@ -9,7 +10,7 @@ export default function ExchangeConfig ({ exchange, banks, rate, types_account, 
       <Head title={`${exchange.origin.name} a ${exchange.destination.name}`} />
 
       <div>
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="mx-auto px-8">
           <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 mb-6">
             <div className="flex justify-between items-center">
               <div className='flex flex-col'>
@@ -29,8 +30,14 @@ export default function ExchangeConfig ({ exchange, banks, rate, types_account, 
             </div>
           </div>
           <div className="grid grid-cols-3 gap-6 items-start">
-            <ExchangeConfigGeneral exchange={exchange} banks={banks} types_account={types_account} document_type={document_type} />
-            <ExchangeConfigRates exchange={exchange} rate={rate} />
+            <div className="col-span-1">
+              <ExchangeConfigGeneral exchange={exchange} banks={banks} types_account={types_account} document_type={document_type}/>
+              <span>gráfico</span>
+            </div>
+            <div className="col-span-2">
+              <ExchangeConfigRates exchange={exchange} rate={rate}/>
+              <ExchangeRatesList rates={exchange.last_ten_rates}/>
+            </div>
           </div>
         </div>
       </div>

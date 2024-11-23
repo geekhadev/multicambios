@@ -46,6 +46,11 @@ class Exchange extends Model
         return $this->hasOne(Rate::class)->latest();
     }
 
+    public function last_ten_rates(): HasMany
+    {
+        return $this->hasMany(Rate::class)->latest()->limit(10);
+    }
+
     public function document_type_owner(): BelongsTo
     {
         return $this->belongsTo(DocumentType::class, 'bank_origin_owner_document_type_id');
