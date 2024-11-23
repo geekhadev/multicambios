@@ -46,9 +46,12 @@ class Exchange extends Model
         return $this->hasOne(Rate::class)->latest();
     }
 
-    public function last_ten_rates(): HasMany
+    public function last_rates(): HasMany
     {
-        return $this->hasMany(Rate::class)->latest()->limit(10);
+        return $this->hasMany(Rate::class)
+            ->latest()
+            ->limit(15)
+            ->orderBy('created_at', 'desc');
     }
 
     public function document_type_owner(): BelongsTo

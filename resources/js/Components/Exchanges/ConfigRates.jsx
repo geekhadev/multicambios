@@ -55,7 +55,7 @@ export default function ExchangeConfigRates ({ exchange }) {
   }
 
   return (
-    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3">
+    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 mb-4">
       {
         (exchange.last_rate && new Date(exchange.last_rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()) && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

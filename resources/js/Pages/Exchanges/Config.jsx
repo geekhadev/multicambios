@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import ExchangeConfigGeneral from '@/Components/Exchanges/ConfigGeneral.jsx'
 import ExchangeConfigRates from '@/Components/Exchanges/ConfigRates.jsx'
 import ExchangeRatesList from '@/Components/Exchanges/ExchangeRatesList.jsx'
+import { ExchangeRatesChart } from '@/Components/Exchanges/ExchangeRatesChart.jsx'
 
 export default function ExchangeConfig ({ exchange, banks, rate, types_account, document_type }) {
   return (
@@ -32,11 +33,11 @@ export default function ExchangeConfig ({ exchange, banks, rate, types_account, 
           <div className="grid grid-cols-3 gap-6 items-start">
             <div className="col-span-1">
               <ExchangeConfigGeneral exchange={exchange} banks={banks} types_account={types_account} document_type={document_type}/>
-              <span>gráfico</span>
             </div>
             <div className="col-span-2">
               <ExchangeConfigRates exchange={exchange} rate={rate}/>
-              <ExchangeRatesList rates={exchange.last_ten_rates}/>
+              <ExchangeRatesChart rates={exchange.last_rates}/>
+              <ExchangeRatesList rates={exchange.last_rates}/>
             </div>
           </div>
         </div>

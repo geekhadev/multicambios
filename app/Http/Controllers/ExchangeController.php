@@ -60,7 +60,7 @@ class ExchangeController extends Controller
                 'destination',
                 'bank_origin',
                 'last_rate',
-                'last_ten_rates'
+                'last_rates'
             )
             ->find($exchange->id);
 

@@ -1,6 +1,6 @@
 const ExchangeRatesList = ({ rates }) => {
   return (
-    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 mt-4">
+    <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3 mb-4">
       <h4 className="text-lg font-bold mb-2">
         Tasas de de la última semana
       </h4>
