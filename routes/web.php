@@ -11,6 +11,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\ExchangeController;
 use App\Http\Middleware\ShareExchanges;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -48,6 +49,10 @@ Route::middleware(['auth', ShareExchanges::class])->group(function () {
         Route::get('customers/{customer}/status', [CustomerController::class, 'status'])->name('customers.status');
         Route::get('customers-confirm/{customer}', [CustomerController::class, 'confirm'])->name('customers.confirm');
         Route::resource('customers', CustomerController::class)->names('customers');
+
+        Route::get('users/{user}/status', [UserController::class, 'status'])->name('users.status');
+        Route::get('users-confirm/{user}', [UserController::class, 'confirm'])->name('users.confirm');
+        Route::resource('users', UserController::class)->names('users');
 
         Route::get('benefits/{benefit}/status', [BenefitController::class, 'status'])->name('benefits.status');
         Route::resource('benefits', BenefitController::class)->names('benefits');
