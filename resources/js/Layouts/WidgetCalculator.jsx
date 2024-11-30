@@ -4,7 +4,8 @@ import { recalculateToReceive, recalculateToSend, recalculateToDollar } from '..
 import { toast } from 'sonner'
 
 export default function WidgetCalculator () {
-  const { globalExchanges } = usePage().props
+  let { globalExchanges } = usePage().props
+  globalExchanges = globalExchanges.filter(exchange => exchange.is_open)
   const [selectedExchange, setSelectedExchange] = useState(globalExchanges.length === 1 ? globalExchanges[0].id : '')
   const [rate, setRate] = useState(0)
   const [inputs, setInputs] = useState({
@@ -109,8 +110,8 @@ export default function WidgetCalculator () {
           className="select-exchange flex-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
           <option value="">{'Selecciona una opción'}</option>
-          {globalExchanges.map((exchange) => (
-            <option key={exchange.id} value={exchange.id} /* disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()} */>
+          {globalExchanges.filter(exchange => exchange.is_open).map((exchange) => (
+            <option key={exchange.id} value={exchange.id}>
               {exchange.origin.name} {' > '} {exchange.destination.name}
             </option>
           ))}
@@ -121,7 +122,6 @@ export default function WidgetCalculator () {
           id='ammountSend'
           onChange={handleInputChange}
           value={parseInt(inputs.ammountSend)}
-          // disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
         />
         <input
           placeholder={'Monto a recibir'}
@@ -129,7 +129,6 @@ export default function WidgetCalculator () {
           id='ammountReceive'
           onChange={handleInputChange}
           value={inputs.ammountReceive}
-          // disabled={rate === null || new Date(rate.created_at).toLocaleDateString() < new Date().toLocaleDateString()}
         />
         <input
           placeholder={'Dolares a recibir'}

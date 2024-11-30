@@ -4,13 +4,25 @@ import { recalculateToReceive, separatorThousands } from '../../Utils/Calculator
 
 const Calculator = () => {
   const { globalExchanges } = usePage().props
-  const [inputs, setInputs] = useState({
-    ammountSend: globalExchanges[0].amount_min,
-    ammountReceive: 0,
-    inputRate: globalExchanges[0].last_rate.general_rate,
-    inputDollar: 0,
-    origin: globalExchanges[0].origin.id,
-    destination: globalExchanges[0].destination.id
+  const [inputs, setInputs] = useState(() => {
+    if (globalExchanges && globalExchanges.length > 0 && globalExchanges[0].is_open) {
+      return {
+        ammountSend: globalExchanges[0].amount_min,
+        ammountReceive: 0,
+        inputRate: globalExchanges[0].last_rate.general_rate,
+        inputDollar: 0,
+        origin: globalExchanges[0].origin.id,
+        destination: globalExchanges[0].destination.id
+      }
+    }
+    return {
+      ammountSend: 0,
+      ammountReceive: 0,
+      inputRate: 0,
+      inputDollar: 0,
+      origin: '',
+      destination: ''
+    }
   })
 
   const handleInputChange = (e) => {
@@ -89,7 +101,7 @@ const Calculator = () => {
                   onChange={handleInputChange}
                 >
                   {
-                    globalExchanges.map((exchange) => (
+                    globalExchanges.filter(exchange => exchange.is_open).map((exchange) => (
                       <option key={exchange.origin.id} value={exchange.origin.id}>{exchange.origin.prefix}</option>
                     ))
                   }
@@ -103,7 +115,7 @@ const Calculator = () => {
                   onChange={handleInputChange}
                 >
                   {
-                    globalExchanges.map((exchange) => (
+                    globalExchanges.filter(exchange => exchange.is_open).map((exchange) => (
                       <option key={exchange.id} value={exchange.destination.id}>{exchange.destination.name}</option>
                     ))
                   }
