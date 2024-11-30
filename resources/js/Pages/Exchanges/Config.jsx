@@ -5,7 +5,7 @@ import ExchangeConfigRates from '@/Components/Exchanges/ConfigRates.jsx'
 import ExchangeRatesList from '@/Components/Exchanges/ExchangeRatesList.jsx'
 import { ExchangeRatesChart } from '@/Components/Exchanges/ExchangeRatesChart.jsx'
 
-export default function ExchangeConfig ({ exchange, banks, rate, types_account, document_type }) {
+export default function ExchangeConfig ({ exchange, banks, rate, types_account, document_type, users }) {
   return (
     <AuthenticatedLayout module="Exchange" action="Configurar">
       <Head title={`${exchange.origin.name} a ${exchange.destination.name}`} />
@@ -32,7 +32,7 @@ export default function ExchangeConfig ({ exchange, banks, rate, types_account, 
           </div>
           <div className="grid grid-cols-3 gap-6 items-start">
             <div className="col-span-1">
-              <ExchangeConfigGeneral exchange={exchange} banks={banks} types_account={types_account} document_type={document_type}/>
+              <ExchangeConfigGeneral exchange={exchange} banks={banks} types_account={types_account} document_type={document_type} users={users}/>
             </div>
             <div className="col-span-2">
               <ExchangeConfigRates exchange={exchange} rate={rate}/>

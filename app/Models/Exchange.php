@@ -58,4 +58,9 @@ class Exchange extends Model
     {
         return $this->belongsTo(DocumentType::class, 'bank_origin_owner_document_type_id');
     }
+
+    public function user_exchange_permisions(): HasMany
+    {
+        return $this->hasMany(UserExchangePermision::class);
+    }
 }

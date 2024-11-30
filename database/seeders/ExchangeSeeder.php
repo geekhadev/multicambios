@@ -50,13 +50,13 @@ class ExchangeSeeder extends Seeder
 
         Rate::create([
             'exchange_id' => $exchange->id,
-            'general_rate' => 1000,
-            'general_profit' => 100,
-            'general_profit_percent' => 10,
-            'preference_rate' => 950,
-            'preference_profit' => 50,
-            'preference_profit_percent' => 5,
-            'rate_dollar' => 10,
+            'general_rate' => 0.0551,
+            'general_profit' => 0.0019,
+            'general_profit_percent' => 3.33333,
+            'preference_rate' => 0.05525,
+            'preference_profit' => 0.05525,
+            'preference_profit_percent' => 3.07018,
+            'rate_dollar' => 58.32,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

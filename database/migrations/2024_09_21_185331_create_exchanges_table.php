@@ -32,6 +32,7 @@ return new class extends Migration
             $table->json('banks_destinations_ids');
             $table->boolean('is_active')->default(true);
             $table->boolean('is_open')->default(true);
+            $table->string('operator')->default('*');
             $table->timestamps();
         });
     }

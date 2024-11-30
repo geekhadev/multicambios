@@ -13,6 +13,8 @@ use App\Models\AccountType;
 use App\Models\Exchange;
 use App\Models\Bank;
 use App\Models\Rate;
+use App\Models\User;
+use App\Models\UserExchangePermision;
 
 class ExchangeController extends Controller
 {
@@ -60,9 +62,14 @@ class ExchangeController extends Controller
                 'destination',
                 'bank_origin',
                 'last_rate',
-                'last_rates'
+                'last_rates',
+                'user_exchange_permisions'
             )
             ->find($exchange->id);
+
+        $users = User::
+            with('user_exchange_permisions')
+            ->limit(10)->get();
 
         $banks = Bank::
             where('country_id', $exchange->country_origin_id)
@@ -77,6 +84,7 @@ class ExchangeController extends Controller
             'banks' => $banks,
             'types_account' => $types_account,
             'document_type' => $document_type,
+            'users' => $users,
         ]);
     }
 
@@ -86,7 +94,6 @@ class ExchangeController extends Controller
     public function update(UpdateExchangeRequest $request, Exchange $exchange)
     {
         $this->authorize('update', $exchange);
-
         $object = Exchange::find($exchange->id);
         $object->country_origin_id = $request->country_origin_id;
         $object->country_destination_id = $request->country_destination_id;
@@ -103,7 +110,23 @@ class ExchangeController extends Controller
         $object->bank_origin_owner_email = $request->bank_origin_owner_email;
         $object->banks_destinations_ids = json_encode($request->banks_destinations_ids);
         $object->is_active = $request->is_active;
-        $object->save();
+        if($object->save()) {
+            // delete permissions for this exchange
+            UserExchangePermision::where('exchange_id', $exchange->id)->delete();
+            // save permissions
+            $permissions = $request->permissions;
+            foreach ($permissions as $key => $value) {
+                foreach ($value as $key2 => $value2) {
+                    if(!$value2) continue;
+                    $permission = new UserExchangePermision();
+                    $permission->user_id = $key;
+                    $permission->exchange_id = $object->id;
+                    $permission->permission_key = $key2;
+                    $permission->permission_value = $value2;
+                    $permission->save();
+                }
+            }
+        }
     }
 
     public function rate(CreateRateRequest $request, Rate $rate)

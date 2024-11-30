@@ -6,12 +6,30 @@ import { Accordion } from 'flowbite-react'
 import { toast } from 'sonner'
 import { roundDecimals } from '../../Utils/Calculator.js'
 
-export default function ExchangeConfigGeneral ({ exchange, banks, types_account, document_type }) {
-  const { data, setData, patch, processing, errors } = useForm(exchange)
-  function handleChange (e) {
-    const key = e.target.id
-    const value = e.target.value
-    setData(key, value)
+export default function ExchangeConfigGeneral ({ exchange, banks, types_account, document_type, users }) {
+  const initialPermissions = users.reduce((acc, user) => {
+    acc[user.id] = user.user_exchange_permisions.reduce((permAcc, perm) => {
+      permAcc[perm.permission_key] = perm.permission_value
+      return permAcc
+    }, {})
+    return acc
+  }, {})
+
+  const { data, setData, patch, processing, errors } = useForm({
+    ...exchange,
+    permissions: initialPermissions || {}
+  })
+
+  function handleChange (e, userId, permissionKey) {
+    const isChecked = e.target.checked
+
+    setData('permissions', {
+      ...data.permissions,
+      [userId]: {
+        ...(data.permissions[userId] || {}), // Asegura que exista un objeto para userId
+        [permissionKey]: isChecked
+      }
+    })
   }
 
   function submit (e) {
@@ -103,6 +121,7 @@ export default function ExchangeConfigGeneral ({ exchange, banks, types_account,
 
   return (
     <div className="bg-white overflow-hidden shadow-sm rounded-lg p-3">
+      {console.log(data.permissions)}
       <div className="flex justify-between items-center">
         <div className='flex flex-col'>
           <h4 className="text-lg font-bold">
@@ -243,6 +262,82 @@ export default function ExchangeConfigGeneral ({ exchange, banks, types_account,
                         )
                   )
                 ))}
+              </Accordion.Content>
+            </Accordion.Panel>
+            <Accordion.Panel>
+              <Accordion.Title className="px-4 py-3">
+                Permisos de usuario
+              </Accordion.Title>
+              <Accordion.Content>
+                <table className="w-full text-sm text-left rtl:text-right">
+                  <thead className="bg-gray-50">
+                    <tr className='bg-gray-200 border-t border-b border-gray-300'>
+                      <th scope="col" className="px-1 py-1 text-left">
+                        Usuarios
+                      </th>
+                      <th scope="col" className="px-1 py-1 text-center">
+                        Crear
+                      </th>
+                      <th scope="col" className="px-1 py-1 text-center">
+                        Acept.
+                      </th>
+                      <th scope="col" className="px-1 py-1 text-center">
+                        Pagar
+                      </th>
+                      <th scope="col" className="px-1 py-1 text-center">
+                        Config.
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {users.map((user) => (
+                      <tr key={user.id}>
+                        {console.log(user.user_exchange_permisions.length > 0 ? user.user_exchange_permisions : 'No tiene permisos')}
+                        <td className="px-1 py-1 whitespace-nowrap text-sm font-medium text-gray-900">
+                          <label className="text-sm text-gray-700" htmlFor={user.id}>
+                            {user.name}
+                          </label>
+                        </td>
+                        <td className="px-1 py-1 whitespace-nowrap text-sm text-gray-500 text-center">
+                          <input
+                            className="p-2 border border-gray-300 rounded-lg"
+                            type="checkbox"
+                            name={`permissions[${user.id}][create]`}
+                            onChange={(e) => handleChange(e, user.id, 'create')}
+                            checked={data.permissions?.[user.id]?.create || false}
+                          />
+                        </td>
+                        <td className="px-1 py-1 whitespace-nowrap text-sm text-gray-500 text-center">
+                          <input
+                            className="p-2 border border-gray-300 rounded-lg"
+                            type="checkbox"
+                            name={`permissions[${user.id}][accept]`}
+                            onChange={(e) => handleChange(e, user.id, 'accept')}
+                            checked={data.permissions?.[user.id]?.accept || false}
+                          />
+                        </td>
+                        <td className="px-1 py-1 whitespace-nowrap text-sm text-gray-500 text-center">
+                          <input
+                            className="p-2 border border-gray-300 rounded-lg"
+                            type="checkbox"
+                            name={`permissions[${user.id}][pay]`}
+                            onChange={(e) => handleChange(e, user.id, 'pay')}
+                            checked={data.permissions?.[user.id]?.pay || false}
+                          />
+                        </td>
+                        <td className="px-1 py-1 whitespace-nowrap text-sm text-gray-500 text-center">
+                          <input
+                            className="p-2 border border-gray-300 rounded-lg"
+                            type="checkbox"
+                            name={`permissions[${user.id}][config]`}
+                            onChange={(e) => handleChange(e, user.id, 'config')}
+                            checked={data.permissions?.[user.id]?.config || false}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
