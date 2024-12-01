@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
@@ -23,6 +24,7 @@ class UserController extends Controller
         $users = User::with(
             'user_exchange_permisions'
         )
+            ->where('type', 'operator')
             ->when($request->search, function ($query, $search) {
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('document_number', 'like', '%'.$search.'%')
@@ -84,7 +86,7 @@ class UserController extends Controller
     {
         $this->authorize('confirm', User::class);
 
-        $customer->confirmed_by = auth()->id();
+        $customer->confirmed_by = Auth::id();
         $customer->confirmed_at = now();
         $customer->save();
 

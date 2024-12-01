@@ -1,13 +1,14 @@
-import { Head, Link } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import DataTable from '@/Components/Datatable/DataTable'
-import DataTableChangeStatus from '@/Components/Datatable/DataTableChangeStatus'
-import CustomerConfirm from '@/Components/Customers/CustomerConfirm.jsx'
 
 const DATATABLE = {
-  title: 'Usuarios',
-  description: 'Listado de usuarios que se han registrado en la app.',
+  title: 'Usuarios Operadores',
+  description: 'Listado de usuarios operadores registrados en la app.',
   order: 'name',
+  filter: {
+    type: 'operator'
+  },
   fields: [
     {
       label: 'Nombre',
@@ -17,6 +18,10 @@ const DATATABLE = {
     {
       label: 'Correo',
       row: 'email'
+    },
+    {
+      label: 'Teléfono',
+      row: 'phone'
     }
   ]
 }
@@ -24,7 +29,7 @@ const DATATABLE = {
 export default function CustomersIndex ({ paginate }) {
   return (
     <AuthenticatedLayout module="Usuarios">
-      <Head title="Usuarios" />
+      <Head title="Usuarios Operadores" />
 
       <DataTable config={DATATABLE} paginate={paginate} />
     </AuthenticatedLayout>
