@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
