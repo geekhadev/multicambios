@@ -10,7 +10,7 @@ const NAV = [
   { label: 'Transacciones', href: 'dashboard.transactions.index' },
   { label: 'Clientes', href: 'dashboard.customers.index' },
   { label: 'Beneficiarios', href: 'dashboard.benefits.index' },
-  { label: 'Users', href: 'dashboard.users.index' },
+  { label: 'Usuarios', href: 'dashboard.users.index' },
   { label: 'Exchanges', href: 'dashboard.exchanges.index' },
   { label: 'Países', href: 'dashboard.countries.index' },
   { label: 'Bancos', href: 'dashboard.banks.index' }
