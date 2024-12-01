@@ -12,8 +12,17 @@ class Benefit extends Model
     use HasUuids, HasFactory;
 
     protected $fillable = [
-        'customer_id',
+        'country_id',
+        'document_type_id',
+        'document_number',
         'name',
+        'email',
+        'phone',
+        'bank_id',
+        'bank_account_type_id',
+        'bank_account_number',
+        'is_active',
+        'customer_id',
     ];
 
     public function customer(): BelongsTo
