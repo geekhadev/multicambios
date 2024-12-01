@@ -23,4 +23,11 @@ class BenefitController extends Controller
 
         return response()->json($beneficiaries);
     }
+
+    public function destroy(Benefit $beneficiary)
+    {
+        $beneficiary->delete();
+
+        return response()->json([], 204);
+    }
 }

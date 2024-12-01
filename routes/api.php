@@ -14,8 +14,12 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::get('/user', [AuthController::class, 'user']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/beneficiaries', [BenefitController::class, 'index']);
+    Route::delete('/beneficiaries/{beneficiary}', [BenefitController::class, 'destroy']);
+
     Route::get('/transactions', [TransactionController::class, 'index']);
+
     Route::get('/exchanges', [ExchangeController::class, 'index']);
     Route::get('/exchanges/{exchange}/open', [ExchangeController::class, 'open']);
+
     Route::get('/pages', [PageController::class, 'index']);
 });
