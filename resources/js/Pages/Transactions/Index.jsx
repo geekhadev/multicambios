@@ -106,8 +106,8 @@ const DATATABLE = {
 
 export default function TransactionsIndex ({ paginate }) {
   return (
-    <AuthenticatedLayout module="Trnasacciones">
-      <Head title="Trnasacciones" />
+    <AuthenticatedLayout module="Transacciones">
+      <Head title="Transacciones" />
 
       <DataTable config={DATATABLE} paginate={paginate} />
     </AuthenticatedLayout>
