@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\ExchangeController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\BankController;
+use App\Http\Controllers\Api\DocumentTypeController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -27,4 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/banks/account-types/', [BankController::class, 'accountTypes']);
     Route::get('/banks/{countryId}', [BankController::class, 'byCountry']);
+
+    Route::get('/document-types', [DocumentTypeController::class, 'index']);
 });
