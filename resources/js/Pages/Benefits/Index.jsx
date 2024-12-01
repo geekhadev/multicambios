@@ -3,7 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import DataTable from '@/Components/Datatable/DataTable'
 import DataTableChangeStatus from '@/Components/Datatable/DataTableChangeStatus'
 import CountryWithIcon from '@/Components/Countries/CountryWithIcon'
-import CustomerConfirm from '@/Components/Customers/CustomerConfirm.jsx'
 import TextCrop from '@/Components/Texts/TextCrop.jsx'
 
 const DATATABLE = {

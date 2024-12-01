@@ -69,30 +69,16 @@ class UserController extends Controller
         ]);
     }
 
-    public function status(User $customer)
+    public function status(User $user)
     {
         $this->authorize('status', User::class);
 
-        $customer->is_active = !$customer->is_active;
-        $customer->save();
+        $user->is_active = !$user->is_active;
+        $user->save();
 
         session()->flash('message', [
             'type' => 'success',
             'content' => 'User status updated successfully.',
-        ]);
-    }
-
-    public function confirm(User $customer)
-    {
-        $this->authorize('confirm', User::class);
-
-        $customer->confirmed_by = Auth::id();
-        $customer->confirmed_at = now();
-        $customer->save();
-
-        session()->flash('message', [
-            'type' => 'success',
-            'content' => 'User confirmed successfully.',
         ]);
     }
 }

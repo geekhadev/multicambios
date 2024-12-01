@@ -1,14 +1,12 @@
 import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import DataTable from '@/Components/Datatable/DataTable'
+import DataTableChangeStatus from '@/Components/Datatable/DataTableChangeStatus'
 
 const DATATABLE = {
   title: 'Usuarios Operadores',
   description: 'Listado de usuarios operadores registrados en la app.',
   order: 'name',
-  filter: {
-    type: 'operator'
-  },
   fields: [
     {
       label: 'Nombre',
@@ -22,6 +20,12 @@ const DATATABLE = {
     {
       label: 'Teléfono',
       row: 'phone'
+    },
+    {
+      label: 'Estado',
+      row: 'is_active',
+      component: (user) => <DataTableChangeStatus data={user} routeName="dashboard.users.status" />,
+      className: 'w-[80px] text-right'
     }
   ]
 }
